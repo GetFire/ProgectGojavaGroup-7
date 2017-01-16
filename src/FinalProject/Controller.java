@@ -58,6 +58,7 @@ public class Controller {
 
         // Тут предлагаю создать свою ошибку, InvalidForm, в том случае когда поля city и hotelName - пустые
 
+
         String city = params.get(CITY);
         String hotelName = params.get(HOTEL_NAME);
         int price;
