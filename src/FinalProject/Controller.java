@@ -55,27 +55,42 @@ public class Controller {
         //подготавливаю код
 //        List<Hotel>allHotels = hotelsDao.getDao();
         List<Hotel> found = new ArrayList<>();
+
+        // Тут предлагаю создать свою ошибку, InvalidForm, в том случае когда поля city и hotelName - пустые
+
         String city = params.get(CITY);
         String hotelName = params.get(HOTEL_NAME);
-        int price = Integer.parseInt(params.get(PRICE));
-        int persons = Integer.parseInt(params.get(PERSONS));
+        int price;
+        int persons;
+        try {
+            price = Integer.parseInt(params.get(PRICE));
+        }catch (Exception e){
+            price = 0;
+        }
+        try{
+            persons = Integer.parseInt(params.get(PERSONS));
+        }catch (Exception ex){
+            persons=0;
+        }
+
+
 
 // Если все параметры не равны 0 или null
-        List<Hotel> found1 = hotels.stream()
-                .filter(a -> a.getCity().equals(city))
-                .filter(a -> a.getHotelName().equals(hotelName))
-                .collect(Collectors.toList());
-        for (Hotel hotel : found1) {
-            List<Room> rooms = hotel.getRooms();
-            for (Room room : rooms) {
-                if (room.getPrice() != price && room.getPersons() != persons) {
-                    rooms.remove(room);
+            List<Hotel> found1 = hotels.stream()
+                    .filter(a -> a.getCity().equals(city))
+                    .filter(a -> a.getHotelName().equals(hotelName))
+                    .collect(Collectors.toList());
+            for (Hotel hotel : found1) {
+                List<Room> rooms = hotel.getRooms();
+                for (Room room : rooms) {
+                    if (room.getPrice() != price && room.getPersons() != persons) {
+                        rooms.remove(room);
+                    }
                 }
             }
+            found = found1;
+            return found;
         }
-        found = found1;
-        return found;
-    }
 
 
     public User registerUser(User user) {
