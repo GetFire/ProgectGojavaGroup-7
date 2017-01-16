@@ -10,7 +10,7 @@ import static FinalProject.Hotel.*;
 Объект данного класса иммитирует работу юзера, путем генерации запросов
 */
 
-public class Controller implements UserInterface {
+public class Controller implements UserInterface, HotelsAPI {
     private List<Hotel> hotels = new ArrayList<>();
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     private DAOImpl hotelsDao = new DAOImpl();
