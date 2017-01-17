@@ -1,4 +1,7 @@
 package FinalProject;
+/**
+ * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
+ */
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -29,7 +32,8 @@ public class Room {
     }
 
 
-    public Room(int persons, String hotelName) {
+    public Room(int persons, String hotelName, int price) {
+        this.price = price;
         this.persons = persons;
         this.hotelName = hotelName;
         this.dateAvaiableFrom = LocalDate.of(2017, 1, 1);

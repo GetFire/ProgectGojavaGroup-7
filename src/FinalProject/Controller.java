@@ -1,5 +1,9 @@
 package FinalProject;
 
+/**
+ * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
+ */
+
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,7 +11,7 @@ import java.util.stream.Collectors;
 import static FinalProject.Hotel.*;
 
 /*
-Объект данного класса иммитирует работу юзера, путем генерации запросов
+* An instance of this class simulates user operation
 */
 
 public class Controller implements UserInterface, HotelsAPI {
@@ -15,19 +19,19 @@ public class Controller implements UserInterface, HotelsAPI {
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     private DAOImpl hotelsDao = new DAOImpl();
 
-    // Находим нужные отели, по имени
+    //Find hotels by name
     public Collection<Hotel> findHotelByName(String name) {
         return hotels.stream().filter(a -> a.getHotelName().equals(name)).collect(Collectors.toList());
 
     }
 
-    // Находим нужные отели, по городу
+    // Find hotels by name city
     public Collection<Hotel> findHotelByCity(String city) {
         return hotels.stream().filter(a -> a.getCity().equals(city)).collect(Collectors.toList());
 
     }
 
-    //бронируем номер, пока не знаю что делать с userID
+    //Booking rhe room. пока не знаю что делать с userID
     public void bookRoom(UUID roomID, UUID userID, UUID hotelID) {
         List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
         Hotel hotel = foundedHotels.get(0);
@@ -37,7 +41,7 @@ public class Controller implements UserInterface, HotelsAPI {
     }
 
 
-    // снимаем бронь, пока не знаю что делать с userID
+    // Cancel booking. пока не знаю что делать с userID
     public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) {
         List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
         Hotel hotel = foundedHotels.get(0);
@@ -56,44 +60,92 @@ public class Controller implements UserInterface, HotelsAPI {
 //        List<Hotel>allHotels = hotelsDao.getDao();
         List<Hotel> found = new ArrayList<>();
 
-        // Тут предлагаю создать свою ошибку, InvalidForm, в том случае когда поля city и hotelName - пустые
-
-
-        String city = params.get(CITY);
-        String hotelName = params.get(HOTEL_NAME);
+        // Тут предлагаю создать свою ошибку, InvalidFormException, в том случае когда поля city и hotelName - пустые
+        String city;
+        String hotelName;
         int price;
         int persons;
+
+        if (params.get(CITY).equals("") || params.get(HOTEL_NAME).equals("")) {
+            throw new InvalidFormException("Please fill the \"City\" and \"Hotel name\" fields");
+        }
+        city = params.get(CITY);
+        hotelName = params.get(HOTEL_NAME);
+
         try {
             price = Integer.parseInt(params.get(PRICE));
-        }catch (Exception e){
+        } catch (Exception e) {
             price = 0;
         }
-        try{
+        try {
             persons = Integer.parseInt(params.get(PERSONS));
-        }catch (Exception ex){
-            persons=0;
+        } catch (Exception ex) {
+            persons = 0;
         }
 
 
 
-// Если все параметры не равны 0 или null
-            List<Hotel> found1 = hotels.stream()
-                    .filter(a -> a.getCity().equals(city))
-                    .filter(a -> a.getHotelName().equals(hotelName))
-                    .collect(Collectors.toList());
-            for (Hotel hotel : found1) {
-                List<Room> rooms = hotel.getRooms();
-                for (Room room : rooms) {
-                    if (room.getPrice() != price && room.getPersons() != persons) {
-                        rooms.remove(room);
+// Set variable of searching
+        int flag = 0;
+        if (price != 0 && persons != 0) flag = 1;
+        else if (price == 0 && persons != 0) flag = 2;
+        else if (price != 0 && persons == 0) flag = 3;
+        else if (price == 0 && persons == 0) flag = 4;
+
+        switch (flag) {
+            case 1:
+                List<Hotel> found1 = hotels.stream()
+                        .filter(a -> a.getCity().equals(city))
+                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .collect(Collectors.toList());
+                for (Hotel hotel : found1) {
+                    List<Room> rooms = hotel.getRooms();
+                    for (Room room : rooms) {
+                        if (room.getPrice() != price && room.getPersons() != persons) rooms.remove(room);
                     }
                 }
-            }
-            found = found1;
-            return found;
+                found = found1;
+                break;
+            case 2:
+                List<Hotel> found2 = hotels.stream()
+                        .filter(a -> a.getCity().equals(city))
+                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .collect(Collectors.toList());
+                for (Hotel hotel : found2) {
+                    List<Room> rooms = hotel.getRooms();
+                    for (Room room : rooms) {
+                        if (room.getPersons() != persons) rooms.remove(room);
+                    }
+                }
+                found = found2;
+                break;
+
+            case 3:
+                List<Hotel> found3 = hotels.stream()
+                        .filter(a -> a.getCity().equals(city))
+                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .collect(Collectors.toList());
+                for (Hotel hotel : found3) {
+                    List<Room> rooms = hotel.getRooms();
+                    for (Room room : rooms) {
+                        if (room.getPrice() != price) rooms.remove(room);
+                    }
+                }
+                found = found3;
+                break;
+            case 4:
+                found = hotels.stream()
+                        .filter(a -> a.getCity().equals(city))
+                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .collect(Collectors.toList());
+                break;
         }
 
-// пока не знаю что с этим делать
+
+        return found;
+    }
+
+    // пока не знаю что с этим делать
     public User registerUser(User user) {
         return null;
     }
