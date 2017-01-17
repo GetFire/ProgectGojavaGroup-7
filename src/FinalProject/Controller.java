@@ -93,7 +93,7 @@ public class Controller implements UserInterface, HotelsAPI {
             return found;
         }
 
-
+// пока не знаю что с этим делать
     public User registerUser(User user) {
         return null;
     }
