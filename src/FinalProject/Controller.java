@@ -84,7 +84,6 @@ public class Controller implements UserInterface, HotelsAPI {
         }
 
 
-
 // Set variable of searching
 
         int flag = 0;
@@ -99,13 +98,18 @@ public class Controller implements UserInterface, HotelsAPI {
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
                         .collect(Collectors.toList());
+
                 for (Hotel hotel : found1) {
                     List<Room> rooms = hotel.getRooms();
-                    for (Room room : rooms) {
-                        if (room.getPrice() != price && room.getPersons() != persons) rooms.remove(room);
+                    for (int i = 0; i < rooms.size(); i++) {
+                        if (rooms.get(i).getPrice() != price && rooms.get(i).getPersons() != persons) {
+                            rooms.remove(i);
+                            i--;
+                        }
                     }
                 }
                 found = found1;
+
                 break;
             case 2:
                 List<Hotel> found2 = hotels.stream()
@@ -114,8 +118,12 @@ public class Controller implements UserInterface, HotelsAPI {
                         .collect(Collectors.toList());
                 for (Hotel hotel : found2) {
                     List<Room> rooms = hotel.getRooms();
-                    for (Room room : rooms) {
-                        if (room.getPersons() != persons) rooms.remove(room);
+                    for (int i = 0; i < rooms.size(); i++) {
+                        if (rooms.get(i).getPersons() != persons) {
+                            rooms.remove(i);
+                            i--;
+                        }
+
                     }
                 }
                 found = found2;
@@ -128,8 +136,11 @@ public class Controller implements UserInterface, HotelsAPI {
                         .collect(Collectors.toList());
                 for (Hotel hotel : found3) {
                     List<Room> rooms = hotel.getRooms();
-                    for (Room room : rooms) {
-                        if (room.getPrice() != price) rooms.remove(room);
+                    for (int i = 0; i < rooms.size(); i++) {
+                        if (rooms.get(i).getPrice() != price) {
+                            rooms.remove(i);
+                            i--;
+                        }
                     }
                 }
                 found = found3;
@@ -142,6 +153,7 @@ public class Controller implements UserInterface, HotelsAPI {
                 break;
         }
 
+        if (found.get(0).getRooms().size() == 0) System.out.println("Not found. Try to change your parameters");
 
         return found;
     }
