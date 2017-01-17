@@ -86,6 +86,7 @@ public class Controller implements UserInterface, HotelsAPI {
 
 
 // Set variable of searching
+
         int flag = 0;
         if (price != 0 && persons != 0) flag = 1;
         else if (price == 0 && persons != 0) flag = 2;
