@@ -49,10 +49,8 @@ public class Main {
         params.put(PERSONS, "10");
 
 
-        List<Hotel> testFound = (ArrayList<Hotel>) controller.findRoom(params);
-        for (Hotel hotel : testFound) {
-            System.out.println(hotel.getRooms());
-        }
+        List<Room> testFound = (ArrayList<Room>) controller.findRoom(params);
+        testFound.forEach(System.out::println);
 
     }
 }

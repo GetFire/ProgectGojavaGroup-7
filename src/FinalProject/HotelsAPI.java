@@ -12,5 +12,5 @@ public interface HotelsAPI {
     Collection<Hotel> findHotelByCity(String city);
     void bookRoom(UUID roomID, UUID userID, UUID hotelID);
     void cancelReservation(UUID roomID, UUID userID, UUID hotelID);
-    Collection<Hotel> findRoom(Map<String, String> params);
+    Collection<Room> findRoom(Map<String, String> params);
 }

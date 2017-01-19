@@ -55,10 +55,10 @@ public class Controller implements UserInterface, HotelsAPI {
     }
 
     // пока пускай будет так
-    public Collection<Hotel> findRoom(Map<String, String> params) {
+    public Collection<Room> findRoom(Map<String, String> params) {
         //подготавливаю код
 //        List<Hotel>allHotels = hotelsDao.getDao();
-        List<Hotel> found = new ArrayList<>();
+        List<Room> found = new ArrayList<>();
 
         // Тут предлагаю создать свою ошибку, InvalidFormException, в том случае когда поля city и hotelName - пустые
         String city;
@@ -94,66 +94,75 @@ public class Controller implements UserInterface, HotelsAPI {
 
         switch (flag) {
             case 1:
-                List<Hotel> found1 = hotels.stream()
+                Optional<Hotel> first = hotels.stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
-                        .collect(Collectors.toList());
-
-                for (Hotel hotel : found1) {
-                    List<Room> rooms = hotel.getRooms();
-                    for (int i = 0; i < rooms.size(); i++) {
-                        if (rooms.get(i).getPrice() != price && rooms.get(i).getPersons() != persons) {
-                            rooms.remove(i);
+                        .findFirst();
+                if (first.isPresent()) {
+                    List<Room> found1 = first.get().getRooms();
+                    for (int i = 0; i < found1.size(); i++) {
+                        if (found1.get(i).getPrice() != price && found1.get(i).getPersons() != persons) {
+                            found1.remove(i);
                             i--;
                         }
                     }
+                    found = found1;
+                } else {
+                    System.out.println("Not found. Try to change your parameters");
+                    found = null;
                 }
-                found = found1;
-
                 break;
             case 2:
-                List<Hotel> found2 = hotels.stream()
+                Optional<Hotel> second = hotels.stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
-                        .collect(Collectors.toList());
-                for (Hotel hotel : found2) {
-                    List<Room> rooms = hotel.getRooms();
-                    for (int i = 0; i < rooms.size(); i++) {
-                        if (rooms.get(i).getPersons() != persons) {
-                            rooms.remove(i);
+                        .findFirst();
+                if (second.isPresent()) {
+                    List<Room> found2 = second.get().getRooms();
+                    for (int i = 0; i < found2.size(); i++) {
+                        if (found2.get(i).getPersons() != persons) {
+                            found2.remove(i);
                             i--;
                         }
-
                     }
+                    found = found2;
+                } else {
+                    System.out.println("Not found. Try to change your parameters");
+                    found = null;
                 }
-                found = found2;
                 break;
 
             case 3:
-                List<Hotel> found3 = hotels.stream()
+                Optional<Hotel> third = hotels.stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
-                        .collect(Collectors.toList());
-                for (Hotel hotel : found3) {
-                    List<Room> rooms = hotel.getRooms();
-                    for (int i = 0; i < rooms.size(); i++) {
-                        if (rooms.get(i).getPrice() != price) {
-                            rooms.remove(i);
+                        .findFirst();
+                if (third.isPresent()) {
+                    List<Room> found3 = third.get().getRooms();
+                    for (int i = 0; i < found3.size(); i++)
+                        if (found3.get(i).getPersons() != price) {
+                            found3.remove(i);
                             i--;
                         }
-                    }
+                    found = found3;
+                } else {
+                    System.out.println("Not found. Try to change your parameters");
+                    found = null;
                 }
-                found = found3;
                 break;
             case 4:
-                found = hotels.stream()
+                Optional<Hotel> fouth = hotels.stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
-                        .collect(Collectors.toList());
+                        .findFirst();
+                if (fouth.isPresent()) {
+                    found = fouth.get().getRooms();
+                } else {
+                    System.out.println("Not found. Try to change your parameters");
+                    found = null;
+                }
                 break;
         }
-
-        if (found.get(0).getRooms().size() == 0) System.out.println("Not found. Try to change your parameters");
 
         return found;
     }
