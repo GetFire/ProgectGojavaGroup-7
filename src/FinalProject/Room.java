@@ -43,7 +43,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "{ Hotel name: " + hotelName
+        return "{Hotel name: " + hotelName
                 + ", persons: " + persons
                 + ", price: " + price + "$}";
 

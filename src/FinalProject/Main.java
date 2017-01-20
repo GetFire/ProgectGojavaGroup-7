@@ -6,47 +6,24 @@ package FinalProject;
 
 import java.util.*;
 
-import static FinalProject.Hotel.*;
-
 public class Main {
     public static void main(String[] args) {
 
         //создаем данные
-        Hotel plaza = new Hotel("Plaza", "Kyiv");
-        Hotel turist = new Hotel("Turist", "Kyiv");
-
-
-        Hotel lviv = new Hotel("Lvivska", "Lviv");
-        Hotel cava = new Hotel("Kava", "Lviv");
-
-        Hotel kh = new Hotel("Kharkivska", "Kharkiv");
-        Hotel praga = new Hotel("Praga", "Kharkiv");
-
-        plaza.createDefaultRooms();
-        turist.createDefaultRooms();
-        lviv.createDefaultRooms();
-        cava.createDefaultRooms();
-        kh.createDefaultRooms();
-        praga.createDefaultRooms();
-
-
-        List<Hotel> hotels = new ArrayList<>();
-        Collections.addAll(hotels, plaza, turist, lviv, cava, kh, praga);
+        List<Hotel> hotels = ProjectUTILS.createHotels(10);
+        ProjectUTILS.createDefaultRooms(hotels);
 
 
         // создаем контроллер
         Controller controller = new Controller(hotels);
 
-        List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity("Lviv");
+        List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity("Львов");
         System.out.println(sdf);
 
 
         // создаем параметры для поиска комнаты
-        Map<String, String> params = new HashMap<>();
-        params.put(CITY, "Lviv");
-        params.put(HOTEL_NAME, "Lvivska");
-        params.put(PRICE, "700");
-        params.put(PERSONS, "10");
+        Map<String, String> params = ProjectUTILS.createUsersRequest();
+
 
 
         List<Room> testFound = (ArrayList<Room>) controller.findRoom(params);

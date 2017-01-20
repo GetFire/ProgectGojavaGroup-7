@@ -2,17 +2,15 @@ package FinalProject;
 
 /**
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
+ *
+ * An instance of this class simulates user operation
  */
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-
 import static FinalProject.Hotel.*;
 
-/*
-* An instance of this class simulates user operation
-*/
 
 public class Controller implements UserInterface, HotelsAPI {
     private List<Hotel> hotels = new ArrayList<>();
@@ -21,15 +19,21 @@ public class Controller implements UserInterface, HotelsAPI {
 
     //Find hotels by name
     public Collection<Hotel> findHotelByName(String name) {
-        return hotels.stream().filter(a -> a.getHotelName().equals(name)).collect(Collectors.toList());
+        List<Hotel> hotel = hotels.stream().filter(a -> a.getHotelName().equals(name)).collect(Collectors.toList());
+        if(hotel.size()==0) System.out.println("Not found");
+        return hotel;
 
     }
+
 
     // Find hotels by name city
     public Collection<Hotel> findHotelByCity(String city) {
-        return hotels.stream().filter(a -> a.getCity().equals(city)).collect(Collectors.toList());
+        List<Hotel> hotel = hotels.stream().filter(a -> a.getCity().equals(city)).collect(Collectors.toList());
+        if(hotel.size()==0) System.out.println("Not found");
+        return hotel;
 
     }
+
 
     //Booking rhe room. пока не знаю что делать с userID
     public void bookRoom(UUID roomID, UUID userID, UUID hotelID) {
@@ -39,6 +43,7 @@ public class Controller implements UserInterface, HotelsAPI {
         Room foundedRoom = rooms.get(0);
         foundedRoom.setAvaible(false);
     }
+
 
 
     // Cancel booking. пока не знаю что делать с userID
@@ -53,6 +58,7 @@ public class Controller implements UserInterface, HotelsAPI {
             System.out.println("Выполнено!");
         }
     }
+
 
     // пока пускай будет так
     public Collection<Room> findRoom(Map<String, String> params) {
@@ -109,7 +115,6 @@ public class Controller implements UserInterface, HotelsAPI {
                     found = found1;
                 } else {
                     System.out.println("Not found. Try to change your parameters");
-                    found = null;
                 }
                 break;
             case 2:
@@ -128,7 +133,6 @@ public class Controller implements UserInterface, HotelsAPI {
                     found = found2;
                 } else {
                     System.out.println("Not found. Try to change your parameters");
-                    found = null;
                 }
                 break;
 
@@ -147,7 +151,6 @@ public class Controller implements UserInterface, HotelsAPI {
                     found = found3;
                 } else {
                     System.out.println("Not found. Try to change your parameters");
-                    found = null;
                 }
                 break;
             case 4:
@@ -159,13 +162,13 @@ public class Controller implements UserInterface, HotelsAPI {
                     found = fouth.get().getRooms();
                 } else {
                     System.out.println("Not found. Try to change your parameters");
-                    found = null;
                 }
                 break;
         }
 
         return found;
     }
+
 
     // пока не знаю что с этим делать
     public User registerUser(User user) {
