@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class User {
 
-    private  final String name;
+    private final String name;
     private final String secondName;
     private UUID id;
 
@@ -31,7 +31,7 @@ public class User {
 
         User user = (User) o;
 
-        return id != null ? id.equals(user.id) : user.id == null;
+        return name != null ? name.equals(user.name) : user.name == null;
 
     }
 
