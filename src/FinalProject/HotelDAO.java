@@ -12,18 +12,18 @@ public class HotelDAO extends DAOImpl<Hotel> {
     }
 
     @Override
-    public Hotel save(Hotel object) {
-        return super.save(object);
+    public Hotel save(Hotel aHotel) {
+        return super.save(aHotel);
     }
 
     @Override
-    public Hotel remove(Hotel object) {
-        return super.remove(object);
+    public Hotel remove(Hotel aHotel) {
+        return super.remove(aHotel);
     }
 
     @Override
-    public Hotel update(Hotel object) {
-        return super.update(object);
+    public Hotel update(Hotel aHotel) {
+        return super.update(aHotel);
     }
 
     public List<Hotel> getHotels() {

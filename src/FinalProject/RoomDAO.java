@@ -12,18 +12,18 @@ public class RoomDAO extends DAOImpl<Room> {
     }
 
     @Override
-    public Room save(Room object) {
-        return super.save(object);
+    public Room save(Room aRoom) {
+        return super.save(aRoom);
     }
 
     @Override
-    public Room remove(Room object) {
-        return super.remove(object);
+    public Room remove(Room aRoom) {
+        return super.remove(aRoom);
     }
 
     @Override
-    public Room update(Room object) {
-        return super.update(object);
+    public Room update(Room aRoom) {
+        return super.update(aRoom);
     }
 
     public List<Hotel> getHotels() {
