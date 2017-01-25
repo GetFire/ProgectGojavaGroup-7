@@ -100,7 +100,7 @@ public class Controller {
             }
             catch (NullPointerException e)
             {
-               throw new InvalidFormException(e.getMessage());
+               throw new InvalidFormException(e.getMessage()+ " where we cancel reservation");
             }
 
         }
