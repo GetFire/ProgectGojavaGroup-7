@@ -10,21 +10,27 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 import static FinalProject.Hotel.*;
 
 
 public class Controller {
     private List<Hotel> hotels = new ArrayList<>();
     private Set<User> users = new HashSet<>();
+    private List<Order> orders = new ArrayList<>();
     private UserDAO userService;
+    private OrderDAO orderService;
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     //private DAOImpl hotelsDao = new DAOImpl();
 
 
-    public Controller(List<Hotel> hotels, Set<User> users) {
+    public Controller(List<Hotel> hotels, Set<User> users, List<Order> orders) {
         this.hotels = hotels;
         this.users = users;
+        this.orders = orders;
         this.userService = new UserDAO(users);
+        this.orderService = new OrderDAO(orders);
+
     }
 
     //Find hotels by name
@@ -46,26 +52,59 @@ public class Controller {
 
 
     //Booking rhe room. пока не знаю что делать с userID
-    public void bookRoom(UUID roomID, UUID userID, UUID hotelID) {
+    public void bookRoom(UUID roomID, UUID userID, UUID hotelID, Date startDate, int days) throws InvalidFormException {
+        /*
         List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
         Hotel hotel = foundedHotels.get(0);
         List<Room> rooms = hotel.getRooms().stream().filter(a -> a.getId().equals(roomID)).collect(Collectors.toList());
         Room foundedRoom = rooms.get(0);
         foundedRoom.setAvaible(false);
+        */
+        //check: Are booked the room, or not
+        List<Order> filteredOrder = orders.stream().filter(a->(a.getHotelID().equals(hotelID)&&a.getRoomID().equals(roomID))).collect(Collectors.toList());
+        for (Order i: filteredOrder)
+        {
+            boolean flag = false;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startDate);
+            cal.set(Calendar.DAY_OF_MONTH,days);
+            long firstDay = i.getStartDate().getTime();
+            long lastDay = cal.getTime().getTime();
+            for (int j = 0; j <days ; j++) {
+                Calendar caltmp = Calendar.getInstance();
+                caltmp.setTime(startDate);
+                caltmp.set(Calendar.DAY_OF_MONTH,j);
+                long currentDay = caltmp.getTime().getTime();
+                if (firstDay<currentDay && currentDay<lastDay)
+                {
+                    throw new InvalidFormException("This dates are reserved");
+                }
+
+            }
+
+        }
+        //add order
+        orderService.save(new Order(userID, hotelID,roomID, startDate,days));
     }
 
 
     // Cancel booking. пока не знаю что делать с userID
-    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) {
-        List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
-        Hotel hotel = foundedHotels.get(0);
-        List<Room> rooms = hotel.getRooms().stream().filter(a -> a.getId().equals(roomID)).collect(Collectors.toList());
-        Room foundedRoom = rooms.get(0);
-        if (!foundedRoom.getIsAvaible()) {
-            foundedRoom.setAvaible(true);
-            foundedRoom.setDateAvaiableFrom(LocalDate.now());
-            System.out.println("Выполнено!");
+    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) throws InvalidFormException{
+        //filter order from user, by hotel and room
+        List<Order> filteredOrder = orders.stream().filter(a->(a.getHotelID().equals(hotelID)&&a.getRoomID().equals(roomID)&&a.getUserID().equals(userID))).collect(Collectors.toList());
+        if (filteredOrder.isEmpty()) throw new InvalidFormException("Order not found, input correct data");
+        else {
+            //delete all filtered orders
+            try {
+                filteredOrder.forEach(orderService::remove);
+            }
+            catch (NullPointerException e)
+            {
+               throw new InvalidFormException(e.getMessage()+ " where we cancel reservation");
+            }
+
         }
+
     }
 
 
