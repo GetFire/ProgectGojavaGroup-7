@@ -77,7 +77,7 @@ public class Controller {
                 long currentDay = caltmp.getTime().getTime();
                 if (firstDay<currentDay && currentDay<lastDay)
                 {
-                    throw new InvalidFormException("This dates ara reserved");
+                    throw new InvalidFormException("This dates are reserved");
                 }
 
             }
@@ -89,16 +89,22 @@ public class Controller {
 
 
     // Cancel booking. пока не знаю что делать с userID
-    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) {
-        List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
-        Hotel hotel = foundedHotels.get(0);
-        List<Room> rooms = hotel.getRooms().stream().filter(a -> a.getId().equals(roomID)).collect(Collectors.toList());
-        Room foundedRoom = rooms.get(0);
-        if (!foundedRoom.getIsAvaible()) {
-            foundedRoom.setAvaible(true);
-            foundedRoom.setDateAvaiableFrom(LocalDate.now());
-            System.out.println("Выполнено!");
+    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) throws InvalidFormException{
+        //filter order from user, by hotel and room
+        List<Order> filteredOrder = orders.stream().filter(a->(a.getHotelID().equals(hotelID)&&a.getRoomID().equals(roomID)&&a.getUserID().equals(userID))).collect(Collectors.toList());
+        if (filteredOrder.isEmpty()) throw new InvalidFormException("Order not found, input correct data");
+        else {
+            //delete all filtered orders
+            try {
+                filteredOrder.forEach(orderService::remove);
+            }
+            catch (NullPointerException e)
+            {
+               throw new InvalidFormException(e.getMessage());
+            }
+
         }
+
     }
 
 
