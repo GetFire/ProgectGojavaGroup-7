@@ -10,7 +10,7 @@ import static FinalProject.Hotel.*;
 /**
  * Created by GetFire on 20.01.2017.
  * <p>
- * This class is going to help you simulated some of Users requests
+ * This class is going to help you simulated some of Users requests and create data entries
  */
 
 
