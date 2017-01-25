@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Created by tvv89 on 24.01.2017 for ProgectGojavaGroup-7.
  */
-public class UserDAO implements DAO<User> {
+public class UserDAO extends DAOImpl<User> {
     private Set<User> users;
 
     public UserDAO(Set<User> users) {
