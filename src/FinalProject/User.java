@@ -8,11 +8,13 @@ import java.util.UUID;
 
 public class User {
 
+    private String nickname;
     private final String name;
     private final String secondName;
     private UUID id;
 
-    public User(String name, String secondName) {
+    public User(String nickname, String name, String secondName) {
+        this.nickname = name;
         this.name = name;
         this.secondName = secondName;
         this.id = UUID.randomUUID();
@@ -20,8 +22,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "{Name: " + name
-                + " segondName: " + secondName + "}";
+        return "{Nickname: " +nickname+ " Name: " + name
+                + " secondName: " + secondName + "}";
     }
 
     @Override
@@ -31,14 +33,18 @@ public class User {
 
         User user = (User) o;
 
-        return name != null ? name.equals(user.name) : user.name == null; /** Мне кажется нужно переделать сравнение по ID,
+        return nickname != null ? nickname.equals(user.nickname) : user.nickname == null; /** Мне кажется нужно переделать сравнение по ID,
          потомучто имена и фамилии могут быть одинаковыми*/
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return nickname != null ? nickname.hashCode() : 0;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 
     public String getName() {

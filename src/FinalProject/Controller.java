@@ -15,8 +15,17 @@ import static FinalProject.Hotel.*;
 
 public class Controller {
     private List<Hotel> hotels = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
+    private UserDAO userService;
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     //private DAOImpl hotelsDao = new DAOImpl();
+
+
+    public Controller(List<Hotel> hotels, Set<User> users) {
+        this.hotels = hotels;
+        this.users = users;
+        this.userService = new UserDAO(users);
+    }
 
     //Find hotels by name
     public Collection<Hotel> findHotelByName(String name) {
@@ -170,9 +179,16 @@ public class Controller {
 
 
     // пока не знаю что с этим делать
-    public User registerUser(User user) {
-        return null;
+    public User registerUser(User user)
+    {
+            if (!users.contains(user)) {
+                userService.save(user);
+                System.out.println("Добро пожаловать!");
+            }else{
+                System.out.println("С возвращением!");}
+            return user;
     }
+
 
     public Controller(List<Hotel> hotels) {
         this.hotels = hotels;
