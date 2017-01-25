@@ -107,10 +107,11 @@ public class Controller {
                 if (first.isPresent()) {
                     List<Room> found1 = first.get().getRooms();
                     for (int i = 0; i < found1.size(); i++) {
-                        if (found1.get(i).getPrice() != price && found1.get(i).getPersons() != persons) {
-                            found1.remove(i);
-                            i--;
+                        if (found1.get(i).getPrice() <= price && found1.get(i).getPersons() >= persons) {
+                            continue;
                         }
+                        found1.remove(i);
+                        i--;
                     }
                     found = found1;
                 } else {
@@ -125,10 +126,11 @@ public class Controller {
                 if (second.isPresent()) {
                     List<Room> found2 = second.get().getRooms();
                     for (int i = 0; i < found2.size(); i++) {
-                        if (found2.get(i).getPersons() != persons) {
-                            found2.remove(i);
-                            i--;
+                        if (found2.get(i).getPersons() >= persons) {
+                            continue;
                         }
+                        found2.remove(i);
+                        i--;
                     }
                     found = found2;
                 } else {
@@ -143,11 +145,13 @@ public class Controller {
                         .findFirst();
                 if (third.isPresent()) {
                     List<Room> found3 = third.get().getRooms();
-                    for (int i = 0; i < found3.size(); i++)
-                        if (found3.get(i).getPersons() != price) {
-                            found3.remove(i);
-                            i--;
+                    for (int i = 0; i < found3.size(); i++) {
+                        if (found3.get(i).getPrice() <= price) {
+                            continue;
                         }
+                        found3.remove(i);
+                        i--;
+                    }
                     found = found3;
                 } else {
                     System.out.println("Not found. Try to change your parameters");
