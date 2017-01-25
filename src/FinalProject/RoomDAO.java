@@ -1,12 +1,13 @@
 package FinalProject;
 
+import java.util.List;
 import java.util.Set;
 
 
 public class RoomDAO extends DAOImpl<Room> {
-    private Set<Hotel>hotels;
+    private List<Hotel>hotels;
 
-    public RoomDAO(Set<Hotel> hotels) {
+    public RoomDAO(List<Hotel> hotels) {
         this.hotels = hotels;
     }
 
@@ -25,11 +26,11 @@ public class RoomDAO extends DAOImpl<Room> {
         return super.update(object);
     }
 
-    public Set<Hotel> getHotels() {
+    public List<Hotel> getHotels() {
         return hotels;
     }
 
-    public void setHotels(Set<Hotel> hotels) {
+    public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
     }
 }

@@ -25,7 +25,8 @@ public class UserDAO extends DAOImpl<User> {
     }
 
     @Override
-    public User update(User aUser) { /** может в этом методе нужно сначала проверять есть ли юзер в базе, если есть вытаскивать его, менять данные
+    public User update(User aUser) { /** может в этом методе нужно сначала проверять есть ли юзер в базе, если есть вытаскивать его,
+     менять данные
      и сохранять уже обновленного юзера в базу и вернуть его. Если его нет, возвращать sout(" Sorry, user not found") retutn aUser */
         return aUser;
     }
