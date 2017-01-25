@@ -22,9 +22,9 @@ public class ProjectUTILS {
         String persons = "";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Введите название города:");
-            city = br.readLine();
+            city = readOnlyFillLine();
             System.out.println("Введите название отеля:");
-            hotelName = br.readLine();
+            hotelName = readOnlyFillLine();
             System.out.println("Введите желаемую цену:");
             price = br.readLine();
             System.out.println("Введите кол-во спальных мест:");
@@ -89,6 +89,27 @@ public class ProjectUTILS {
             hotel.setRooms(room);
         }
         return hotels;
+    }
+
+    public static String readOnlyFillLine() throws IOException {
+        int count = 3;
+        String line = "";
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while (count > 0) {
+            line = br.readLine();
+            try {
+                if (line.length() == 0 || Integer.valueOf(line) != null) {
+                    count--;
+                    System.err.println("This field must be filled in correctly. You have " + count + " attempts!");
+                }
+                if (count <= 0) {
+                    throw new InvalidFormException("Sorry, invalid data!");
+                }
+            } catch (NumberFormatException ignored) {
+                return line;
+            }
+        }
+        return line;
     }
 
 

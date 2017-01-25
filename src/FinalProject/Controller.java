@@ -67,16 +67,11 @@ public class Controller {
         List<Room> found = new ArrayList<>();
 
         // Тут предлагаю создать свою ошибку, InvalidFormException, в том случае когда поля city и hotelName - пустые
-        String city;
-        String hotelName;
+        String city = params.get(CITY);
+        String hotelName = params.get(HOTEL_NAME);
         int price;
         int persons;
 
-        if (params.get(CITY).equals("") || params.get(HOTEL_NAME).equals("")) {
-            throw new InvalidFormException("Please fill the \"City\" and \"Hotel name\" fields");
-        }
-        city = params.get(CITY);
-        hotelName = params.get(HOTEL_NAME);
 
         try {
             price = Integer.parseInt(params.get(PRICE));
