@@ -10,28 +10,28 @@ import static FinalProject.Hotel.*;
 /**
  * Created by GetFire on 20.01.2017.
  * <p>
- * This class is going to help you simulated some of Users requests
+ * This class is going to help you simulated some of Users requests and create data entries
  */
 
 
 public class ProjectUTILS {
     public static Map<String, String> createUsersRequest() {
-        String city="";
-        String hotelName="";
-        String price="";
-        String persons="";
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+        String city = "";
+        String hotelName = "";
+        String price = "";
+        String persons = "";
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Введите название города:");
-            city = br.readLine();
+            city = readOnlyFillLine();
             System.out.println("Введите название отеля:");
-            hotelName=br.readLine();
+            hotelName = readOnlyFillLine();
             System.out.println("Введите желаемую цену:");
-            price=br.readLine();
+            price = br.readLine();
             System.out.println("Введите кол-во спальных мест:");
-            persons=br.readLine();
+            persons = br.readLine();
 
-        }catch (IOException e){
-            System.out.println(e.getClass().getSimpleName()+": "+e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getClass().getSimpleName() + ": " + e.getMessage());
         }
 
 
@@ -55,13 +55,13 @@ public class ProjectUTILS {
         String[] citiesName = {"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
                 "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
-        List<Hotel>created = new ArrayList<>();
-        while (howMany>0){
-            int rand1= (int)(Math.random()*hotelsNames.length);
-            int rand2= (int)(Math.random()*citiesName.length);
-            Hotel hotel = new Hotel(hotelsNames[rand1],citiesName[rand2]);
+        List<Hotel> created = new ArrayList<>();
+        while (howMany > 0) {
+            int rand1 = (int) (Math.random() * hotelsNames.length);
+            int rand2 = (int) (Math.random() * citiesName.length);
+            Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand2]);
             if (created.contains(hotel)) {
-                hotel=null;
+                hotel = null;
                 continue;
             }
             created.add(hotel);
@@ -71,7 +71,7 @@ public class ProjectUTILS {
         return created;
     }
 
-    public static List<Hotel>createDefaultRooms(List<Hotel>hotels){
+    public static List<Hotel> createDefaultRooms(List<Hotel> hotels) {
         for (Hotel hotel : hotels) {
             List<Room> room = new ArrayList<>();
             String hotelName = hotel.getHotelName();
@@ -89,6 +89,27 @@ public class ProjectUTILS {
             hotel.setRooms(room);
         }
         return hotels;
+    }
+
+    public static String readOnlyFillLine() throws IOException {
+        int count = 3;
+        String line = "";
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while (count > 0) {
+            line = br.readLine();
+            try {
+                if (line.length() == 0 || Integer.valueOf(line) != null) {
+                    count--;
+                    System.err.println("This field must be filled in correctly. You have " + count + " attempts!");
+                }
+                if (count <= 0) {
+                    throw new InvalidFormException("Sorry, invalid data!");
+                }
+            } catch (NumberFormatException ignored) {
+                return line;
+            }
+        }
+        return line;
     }
 
 

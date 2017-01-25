@@ -31,7 +31,8 @@ public class User {
 
         User user = (User) o;
 
-        return name != null ? name.equals(user.name) : user.name == null;
+        return name != null ? name.equals(user.name) : user.name == null; /** Мне кажется нужно переделать сравнение по ID,
+         потомучто имена и фамилии могут быть одинаковыми*/
 
     }
 

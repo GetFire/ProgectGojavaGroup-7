@@ -2,17 +2,18 @@ package FinalProject;
 
 /**
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
- *
+ * <p>
  * An instance of this class simulates user operation
  */
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static FinalProject.Hotel.*;
 
 
-public class Controller{
+public class Controller {
     private List<Hotel> hotels = new ArrayList<>();
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     //private DAOImpl hotelsDao = new DAOImpl();
@@ -20,7 +21,7 @@ public class Controller{
     //Find hotels by name
     public Collection<Hotel> findHotelByName(String name) {
         List<Hotel> hotel = hotels.stream().filter(a -> a.getHotelName().equals(name)).collect(Collectors.toList());
-        if(hotel.size()==0) System.out.println("Not found");
+        if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
     }
@@ -29,7 +30,7 @@ public class Controller{
     // Find hotels by name city
     public Collection<Hotel> findHotelByCity(String city) {
         List<Hotel> hotel = hotels.stream().filter(a -> a.getCity().equals(city)).collect(Collectors.toList());
-        if(hotel.size()==0) System.out.println("Not found");
+        if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
     }
@@ -43,7 +44,6 @@ public class Controller{
         Room foundedRoom = rooms.get(0);
         foundedRoom.setAvaible(false);
     }
-
 
 
     // Cancel booking. пока не знаю что делать с userID
@@ -67,16 +67,11 @@ public class Controller{
         List<Room> found = new ArrayList<>();
 
         // Тут предлагаю создать свою ошибку, InvalidFormException, в том случае когда поля city и hotelName - пустые
-        String city;
-        String hotelName;
+        String city = params.get(CITY);
+        String hotelName = params.get(HOTEL_NAME);
         int price;
         int persons;
 
-        if (params.get(CITY).equals("") || params.get(HOTEL_NAME).equals("")) {
-            throw new InvalidFormException("Please fill the \"City\" and \"Hotel name\" fields");
-        }
-        city = params.get(CITY);
-        hotelName = params.get(HOTEL_NAME);
 
         try {
             price = Integer.parseInt(params.get(PRICE));
@@ -107,10 +102,11 @@ public class Controller{
                 if (first.isPresent()) {
                     List<Room> found1 = first.get().getRooms();
                     for (int i = 0; i < found1.size(); i++) {
-                        if (found1.get(i).getPrice() != price && found1.get(i).getPersons() != persons) {
-                            found1.remove(i);
-                            i--;
+                        if (found1.get(i).getPrice() <= price && found1.get(i).getPersons() >= persons) {
+                            continue;
                         }
+                        found1.remove(i);
+                        i--;
                     }
                     found = found1;
                 } else {
@@ -125,10 +121,11 @@ public class Controller{
                 if (second.isPresent()) {
                     List<Room> found2 = second.get().getRooms();
                     for (int i = 0; i < found2.size(); i++) {
-                        if (found2.get(i).getPersons() != persons) {
-                            found2.remove(i);
-                            i--;
+                        if (found2.get(i).getPersons() >= persons) {
+                            continue;
                         }
+                        found2.remove(i);
+                        i--;
                     }
                     found = found2;
                 } else {
@@ -143,11 +140,13 @@ public class Controller{
                         .findFirst();
                 if (third.isPresent()) {
                     List<Room> found3 = third.get().getRooms();
-                    for (int i = 0; i < found3.size(); i++)
-                        if (found3.get(i).getPersons() != price) {
-                            found3.remove(i);
-                            i--;
+                    for (int i = 0; i < found3.size(); i++) {
+                        if (found3.get(i).getPrice() <= price) {
+                            continue;
                         }
+                        found3.remove(i);
+                        i--;
+                    }
                     found = found3;
                 } else {
                     System.out.println("Not found. Try to change your parameters");
