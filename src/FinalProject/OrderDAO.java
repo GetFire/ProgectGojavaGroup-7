@@ -25,8 +25,5 @@ public class OrderDAO extends DAOImpl<Order>
         return super.remove(object);
     }
 
-    @Override
-    public Order update(Order object) {
-        return super.update(object);
-    }
+
 }
