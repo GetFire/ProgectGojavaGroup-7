@@ -25,7 +25,6 @@ public class Main {
         Map<String, String> params = ProjectUTILS.createUsersRequest();
 
 
-
         List<Room> testFound = (ArrayList<Room>) controller.findRoom(params);
         testFound.forEach(System.out::println);
 

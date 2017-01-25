@@ -16,22 +16,22 @@ import static FinalProject.Hotel.*;
 
 public class ProjectUTILS {
     public static Map<String, String> createUsersRequest() {
-        String city="";
-        String hotelName="";
-        String price="";
-        String persons="";
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+        String city = "";
+        String hotelName = "";
+        String price = "";
+        String persons = "";
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Введите название города:");
             city = br.readLine();
             System.out.println("Введите название отеля:");
-            hotelName=br.readLine();
+            hotelName = br.readLine();
             System.out.println("Введите желаемую цену:");
-            price=br.readLine();
+            price = br.readLine();
             System.out.println("Введите кол-во спальных мест:");
-            persons=br.readLine();
+            persons = br.readLine();
 
-        }catch (IOException e){
-            System.out.println(e.getClass().getSimpleName()+": "+e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getClass().getSimpleName() + ": " + e.getMessage());
         }
 
 
@@ -55,13 +55,13 @@ public class ProjectUTILS {
         String[] citiesName = {"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
                 "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
-        List<Hotel>created = new ArrayList<>();
-        while (howMany>0){
-            int rand1= (int)(Math.random()*hotelsNames.length);
-            int rand2= (int)(Math.random()*citiesName.length);
-            Hotel hotel = new Hotel(hotelsNames[rand1],citiesName[rand2]);
+        List<Hotel> created = new ArrayList<>();
+        while (howMany > 0) {
+            int rand1 = (int) (Math.random() * hotelsNames.length);
+            int rand2 = (int) (Math.random() * citiesName.length);
+            Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand2]);
             if (created.contains(hotel)) {
-                hotel=null;
+                hotel = null;
                 continue;
             }
             created.add(hotel);
@@ -71,7 +71,7 @@ public class ProjectUTILS {
         return created;
     }
 
-    public static List<Hotel>createDefaultRooms(List<Hotel>hotels){
+    public static List<Hotel> createDefaultRooms(List<Hotel> hotels) {
         for (Hotel hotel : hotels) {
             List<Room> room = new ArrayList<>();
             String hotelName = hotel.getHotelName();

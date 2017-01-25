@@ -2,17 +2,18 @@ package FinalProject;
 
 /**
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
- *
+ * <p>
  * An instance of this class simulates user operation
  */
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static FinalProject.Hotel.*;
 
 
-public class Controller{
+public class Controller {
     private List<Hotel> hotels = new ArrayList<>();
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     //private DAOImpl hotelsDao = new DAOImpl();
@@ -20,7 +21,7 @@ public class Controller{
     //Find hotels by name
     public Collection<Hotel> findHotelByName(String name) {
         List<Hotel> hotel = hotels.stream().filter(a -> a.getHotelName().equals(name)).collect(Collectors.toList());
-        if(hotel.size()==0) System.out.println("Not found");
+        if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
     }
@@ -29,7 +30,7 @@ public class Controller{
     // Find hotels by name city
     public Collection<Hotel> findHotelByCity(String city) {
         List<Hotel> hotel = hotels.stream().filter(a -> a.getCity().equals(city)).collect(Collectors.toList());
-        if(hotel.size()==0) System.out.println("Not found");
+        if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
     }
@@ -43,7 +44,6 @@ public class Controller{
         Room foundedRoom = rooms.get(0);
         foundedRoom.setAvaible(false);
     }
-
 
 
     // Cancel booking. пока не знаю что делать с userID
