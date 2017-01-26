@@ -6,7 +6,8 @@ import java.util.UUID;
 /**
  * Created by ExAngelO on 25.01.2017.
  */
-public class Order {private UUID id;
+public class Order {
+    private UUID id;
     private UUID userID;
     private UUID hotelID;
     private UUID roomID;
@@ -40,5 +41,9 @@ public class Order {private UUID id;
 
     public int getDays() {
         return days;
+    }
+
+    public UUID getOrderID() {
+        return id;
     }
 }

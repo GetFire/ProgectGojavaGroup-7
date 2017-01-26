@@ -91,13 +91,13 @@ public class ProjectUTILS {
         return hotels;
     }
 
-    public static String readOnlyFillLine() throws IOException {
+    public static String readOnlyFillLine(){
         int count = 3;
         String line = "";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (count > 0) {
-            line = br.readLine();
             try {
+                line = br.readLine();
                 if (line.length() == 0 || Integer.valueOf(line) != null) {
                     count--;
                     System.err.println("This field must be filled in correctly. You have " + count + " attempts!");
@@ -107,7 +107,10 @@ public class ProjectUTILS {
                 }
             } catch (NumberFormatException ignored) {
                 return line;
+            }catch (IOException e){
+                System.out.println("Проблема гдето в утилите");
             }
+
         }
         return line;
     }

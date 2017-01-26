@@ -25,5 +25,7 @@ public class OrderDAO extends DAOImpl<Order>
         return super.remove(object);
     }
 
-
+    public List<Order> getOrders() {
+        return orders;
+    }
 }

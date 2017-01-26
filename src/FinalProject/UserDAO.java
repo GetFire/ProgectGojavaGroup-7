@@ -82,5 +82,9 @@ public class UserDAO extends DAOImpl<User> {
 
 
     }
+
+    public Set<User> getUsers() {
+        return users;
+    }
 }
 

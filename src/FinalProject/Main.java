@@ -9,14 +9,17 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        //создаем данные
+        //create data
         List<Hotel> hotels = ProjectUTILS.createHotels(10);
         ProjectUTILS.createDefaultRooms(hotels);
 
 
-        // создаем контроллер
+        // create controller
         Controller controller = new Controller(hotels);
 
+        //find hotel by city
+//        System.out.print("Введите название города: ");
+//        String city = ProjectUTILS.readOnlyFillLine();
         List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity("Львов");
         System.out.println(sdf);
 

@@ -6,7 +6,6 @@ package FinalProject;
  * An instance of this class simulates user operation
  */
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,19 +14,21 @@ import static FinalProject.Hotel.*;
 
 
 public class Controller {
-    private List<Hotel> hotels = new ArrayList<>();
-    private Set<User> users = new HashSet<>();
-    private List<Order> orders = new ArrayList<>();
+//    private List<Hotel> hotels = new ArrayList<>();/** этого не должно быть в Котнроллере  */
+//    private Set<User> users = new HashSet<>();              /** вместо этого должны быть   */
+//    private List<Order> orders = new ArrayList<>();/** Даошки (UserDAO, HotelDAO, OrderDAO*/
     private UserDAO userService;
     private OrderDAO orderService;
+    private HotelDAO hotelService;
     //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
     //private DAOImpl hotelsDao = new DAOImpl();
 
 
     public Controller(List<Hotel> hotels, Set<User> users, List<Order> orders) {
-        this.hotels = hotels;
-        this.users = users;
-        this.orders = orders;
+//        this.hotels = hotels;
+//        this.users = users;
+//        this.orders = orders;
+        this.hotelService = new HotelDAO(hotels);
         this.userService = new UserDAO(users);
         this.orderService = new OrderDAO(orders);
 
@@ -35,7 +36,7 @@ public class Controller {
 
     //Find hotels by name
     public Collection<Hotel> findHotelByName(String name) {
-        List<Hotel> hotel = hotels.stream().filter(a -> a.getHotelName().equals(name)).collect(Collectors.toList());
+        List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getHotelName().equalsIgnoreCase(name)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
@@ -44,14 +45,14 @@ public class Controller {
 
     // Find hotels by name city
     public Collection<Hotel> findHotelByCity(String city) {
-        List<Hotel> hotel = hotels.stream().filter(a -> a.getCity().equals(city)).collect(Collectors.toList());
+        List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
     }
 
 
-    //Booking rhe room. пока не знаю что делать с userID
+
     public void bookRoom(UUID roomID, UUID userID, UUID hotelID, Date startDate, int days) throws InvalidFormException {
         /*
         List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
@@ -60,23 +61,21 @@ public class Controller {
         Room foundedRoom = rooms.get(0);
         foundedRoom.setAvaible(false);
         */
-        //check: Are booked the room, or not
-        List<Order> filteredOrder = orders.stream().filter(a->(a.getHotelID().equals(hotelID)&&a.getRoomID().equals(roomID))).collect(Collectors.toList());
-        for (Order i: filteredOrder)
-        {
+        //check: Is the room booked, or not
+        List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
+        for (Order i : filteredOrder) {
             boolean flag = false;
             Calendar cal = Calendar.getInstance();
             cal.setTime(startDate);
-            cal.set(Calendar.DAY_OF_MONTH,days);
+            cal.set(Calendar.DAY_OF_MONTH, days);
             long firstDay = i.getStartDate().getTime();
             long lastDay = cal.getTime().getTime();
-            for (int j = 0; j <days ; j++) {
+            for (int j = 0; j < days; j++) {
                 Calendar caltmp = Calendar.getInstance();
                 caltmp.setTime(startDate);
-                caltmp.set(Calendar.DAY_OF_MONTH,j);
+                caltmp.set(Calendar.DAY_OF_MONTH, j);
                 long currentDay = caltmp.getTime().getTime();
-                if (firstDay<currentDay && currentDay<lastDay)
-                {
+                if (firstDay < currentDay && currentDay < lastDay) {
                     throw new InvalidFormException("This dates are reserved");
                 }
 
@@ -84,31 +83,26 @@ public class Controller {
 
         }
         //add order
-        orderService.save(new Order(userID, hotelID,roomID, startDate,days));
+        orderService.save(new Order(userID, hotelID, roomID, startDate, days));
     }
 
 
-    // Cancel booking. пока не знаю что делать с userID
-    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) throws InvalidFormException{
+    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) throws InvalidFormException {
         //filter order from user, by hotel and room
-        List<Order> filteredOrder = orders.stream().filter(a->(a.getHotelID().equals(hotelID)&&a.getRoomID().equals(roomID)&&a.getUserID().equals(userID))).collect(Collectors.toList());
+        List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID) && a.getUserID().equals(userID))).collect(Collectors.toList());
         if (filteredOrder.isEmpty()) throw new InvalidFormException("Order not found, input correct data");
         else {
             //delete all filtered orders
             try {
                 filteredOrder.forEach(orderService::remove);
-            }
-            catch (NullPointerException e)
-            {
-               throw new InvalidFormException(e.getMessage()+ " where we cancel reservation");
+            } catch (NullPointerException e) {
+                throw new InvalidFormException(e.getMessage() + " where we cancel reservation");
             }
 
         }
 
     }
 
-
-    // пока пускай будет так
     public Collection<Room> findRoom(Map<String, String> params) {
         //подготавливаю код
 //        List<Hotel>allHotels = hotelsDao.getDao();
@@ -143,7 +137,7 @@ public class Controller {
 
         switch (flag) {
             case 1:
-                Optional<Hotel> first = hotels.stream()
+                Optional<Hotel> first = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
                         .findFirst();
@@ -162,7 +156,7 @@ public class Controller {
                 }
                 break;
             case 2:
-                Optional<Hotel> second = hotels.stream()
+                Optional<Hotel> second = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
                         .findFirst();
@@ -182,7 +176,7 @@ public class Controller {
                 break;
 
             case 3:
-                Optional<Hotel> third = hotels.stream()
+                Optional<Hotel> third = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
                         .findFirst();
@@ -201,7 +195,7 @@ public class Controller {
                 }
                 break;
             case 4:
-                Optional<Hotel> fouth = hotels.stream()
+                Optional<Hotel> fouth = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
                         .filter(a -> a.getHotelName().equals(hotelName))
                         .findFirst();
@@ -212,25 +206,23 @@ public class Controller {
                 }
                 break;
         }
-        if (found.size()==0)
+        if (found.size() == 0)
             System.out.println("Not found. Try to change your parameters");
         return found;
     }
 
-
-    // пока не знаю что с этим делать
-    public User registerUser(User user)
-    {
-            if (!users.contains(user)) {
-                userService.save(user);
-                System.out.println("Добро пожаловать!");
-            }else{
-                System.out.println("С возвращением!");}
-            return user;
+    public User registerUser(User user) {
+        if (!userService.getUsers().contains(user)) {
+            userService.save(user);
+            System.out.println("Добро пожаловать!");
+        } else {
+            System.out.println("С возвращением!");
+        }
+        return user;
     }
 
 
     public Controller(List<Hotel> hotels) {
-        this.hotels = hotels;
+        this.hotelService = new HotelDAO(hotels);
     }
 }
