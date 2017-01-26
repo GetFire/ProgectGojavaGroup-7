@@ -11,6 +11,10 @@ public class HotelDAO extends DAOImpl<Hotel> {
         this.hotels = hotels;
     }
 
+    public HotelDAO(){
+
+    }
+
     @Override
     public Hotel save(Hotel aHotel) {
         return super.save(aHotel);

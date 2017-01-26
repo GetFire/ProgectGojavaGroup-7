@@ -12,6 +12,7 @@ public class OrderDAO extends DAOImpl<Order>
     public OrderDAO(List<Order> orders) {
         this.orders = orders;
     }
+    public OrderDAO(){}
 
     @Override
     public Order save(Order object) {
@@ -25,5 +26,9 @@ public class OrderDAO extends DAOImpl<Order>
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

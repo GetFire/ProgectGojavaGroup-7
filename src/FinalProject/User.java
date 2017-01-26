@@ -12,6 +12,7 @@ public class User {
     private final String name;
     private final String secondName;
     private UUID id;
+    private boolean login = false;
 
     public User(String nickname, String name, String secondName) {
         this.nickname = nickname;
@@ -25,6 +26,8 @@ public class User {
         return "{Nickname: " + nickname + " Name: " + name
                 + " secondName: " + secondName + "}";
     }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -53,5 +56,12 @@ public class User {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+    public boolean getLogin() {
+        return login;
     }
 }

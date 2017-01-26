@@ -51,7 +51,7 @@ public class Controller {
     /**
      * booked the room
      */
-    public void bookRoom(UUID roomID, UUID userID, UUID hotelID, Date startDate, int days) throws InvalidFormException {
+    public void bookRoom(UUID roomID, User user, UUID hotelID, Date startDate, int days) throws InvalidFormException {
         /*
         List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
         Hotel hotel = foundedHotels.get(0);
@@ -60,50 +60,53 @@ public class Controller {
         foundedRoom.setAvaible(false);
         */
         //check: Is the room booked, or not
-        List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
-        for (Order i : filteredOrder) {
-            boolean flag = false;
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(startDate);
-            cal.set(Calendar.DAY_OF_MONTH, days);
-            long firstDay = i.getStartDate().getTime();
-            long lastDay = cal.getTime().getTime();
-            for (int j = 0; j < days; j++) {
-                Calendar caltmp = Calendar.getInstance();
-                caltmp.setTime(startDate);
-                caltmp.set(Calendar.DAY_OF_MONTH, j);
-                long currentDay = caltmp.getTime().getTime();
-                if (firstDay < currentDay && currentDay < lastDay) {
-                    throw new InvalidFormException("This dates are reserved");
+        if (user.getLogin()) {
+            List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
+            for (Order i : filteredOrder) {
+                boolean flag = false;
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(startDate);
+                cal.set(Calendar.DAY_OF_MONTH, days);
+                long firstDay = i.getStartDate().getTime();
+                long lastDay = cal.getTime().getTime();
+                for (int j = 0; j < days; j++) {
+                    Calendar caltmp = Calendar.getInstance();
+                    caltmp.setTime(startDate);
+                    caltmp.set(Calendar.DAY_OF_MONTH, j);
+                    long currentDay = caltmp.getTime().getTime();
+                    if (firstDay < currentDay && currentDay < lastDay) {
+                        throw new InvalidFormException("This dates are reserved");
+                    }
+                }
+            }
+            //add order
+            orderService.save(new Order(user.getId(), hotelID, roomID, startDate, days));
+        } else
+            System.out.println("If you want to book the room, you must be logIn!");
+    }
+
+
+    public void cancelReservation(UUID roomID, User user, UUID hotelID) throws InvalidFormException {
+        //filter order from user, by hotel and room
+        if (user.getLogin()) {
+            List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID) && a.getUserID().equals(user.getId()))).collect(Collectors.toList());
+            if (filteredOrder.isEmpty()) throw new InvalidFormException("Order not found, input correct data");
+            else {
+                //delete all filtered orders
+                try {
+                    filteredOrder.forEach(orderService::remove);
+                } catch (NullPointerException e) {
+                    throw new InvalidFormException(e.getMessage() + " where we cancel reservation");
                 }
 
             }
 
-        }
-        //add order
-        orderService.save(new Order(userID, hotelID, roomID, startDate, days));
-    }
-
-
-    public void cancelReservation(UUID roomID, UUID userID, UUID hotelID) throws InvalidFormException {
-        //filter order from user, by hotel and room
-        List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID) && a.getUserID().equals(userID))).collect(Collectors.toList());
-        if (filteredOrder.isEmpty()) throw new InvalidFormException("Order not found, input correct data");
-        else {
-            //delete all filtered orders
-            try {
-                filteredOrder.forEach(orderService::remove);
-            } catch (NullPointerException e) {
-                throw new InvalidFormException(e.getMessage() + " where we cancel reservation");
-            }
-
-        }
-
+        } else
+            System.out.println("If you want to cancel the reservation, you must be logIn!");
     }
 
     public Collection<Room> findRoom(Map<String, String> params) {
         List<Room> found = new ArrayList<>();
-
         String city = params.get(CITY);
         String hotelName = params.get(HOTEL_NAME);
         int price;
@@ -202,15 +205,19 @@ public class Controller {
         }
         if (found.size() == 0)
             System.out.println("Not found. Try to change your parameters");
+
         return found;
     }
 
     public User registerUser(User user) {
         if (!userService.getUsers().contains(user)) {
             userService.save(user);
-            System.out.println("Добро пожаловать!");
+            System.out.println(user.getNickname() + " добро пожаловать!");
+            userService.writeUserDao(userService.getUsers());
+            user.setLogin(true);
         } else {
-            System.out.println("С возвращением!");
+            System.out.println("С возвращением! Мы по тебе скучали!");
+            user.setLogin(true);
         }
         return user;
     }
@@ -218,5 +225,11 @@ public class Controller {
 
     public Controller(List<Hotel> hotels) {
         this.hotelService = new HotelDAO(hotels);
+    }
+
+    public Controller() {
+        this.hotelService = new HotelDAO();
+        this.userService = new UserDAO();
+        this.orderService = new OrderDAO();
     }
 }

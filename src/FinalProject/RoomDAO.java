@@ -3,10 +3,13 @@ package FinalProject;
 import java.util.List;
 
 public class RoomDAO extends DAOImpl<Room> {
-    private List<Hotel>hotels;
+    private List<Hotel> hotels;
 
     public RoomDAO(List<Hotel> hotels) {
         this.hotels = hotels;
+    }
+
+    public RoomDAO() {
     }
 
     @Override
