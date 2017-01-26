@@ -14,27 +14,22 @@ import static FinalProject.Hotel.*;
 
 
 public class Controller {
-//    private List<Hotel> hotels = new ArrayList<>();/** этого не должно быть в Котнроллере  */
-//    private Set<User> users = new HashSet<>();              /** вместо этого должны быть   */
-//    private List<Order> orders = new ArrayList<>();/** Даошки (UserDAO, HotelDAO, OrderDAO*/
+
     private UserDAO userService;
     private OrderDAO orderService;
     private HotelDAO hotelService;
-    //@добавлю DAO на будущее, потом в методах нужно использовать дао вместо поля hotels
-    //private DAOImpl hotelsDao = new DAOImpl();
 
 
     public Controller(List<Hotel> hotels, Set<User> users, List<Order> orders) {
-//        this.hotels = hotels;
-//        this.users = users;
-//        this.orders = orders;
         this.hotelService = new HotelDAO(hotels);
         this.userService = new UserDAO(users);
         this.orderService = new OrderDAO(orders);
 
     }
 
-    //Find hotels by name
+    /**
+     * Find hotels by name
+     */
     public Collection<Hotel> findHotelByName(String name) {
         List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getHotelName().equalsIgnoreCase(name)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
@@ -43,7 +38,9 @@ public class Controller {
     }
 
 
-    // Find hotels by name city
+    /**
+     * Find hotels by name city
+     */
     public Collection<Hotel> findHotelByCity(String city) {
         List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
@@ -51,8 +48,9 @@ public class Controller {
 
     }
 
-
-
+    /**
+     * booked the room
+     */
     public void bookRoom(UUID roomID, UUID userID, UUID hotelID, Date startDate, int days) throws InvalidFormException {
         /*
         List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
@@ -104,16 +102,12 @@ public class Controller {
     }
 
     public Collection<Room> findRoom(Map<String, String> params) {
-        //подготавливаю код
-//        List<Hotel>allHotels = hotelsDao.getDao();
         List<Room> found = new ArrayList<>();
 
-        // Тут предлагаю создать свою ошибку, InvalidFormException, в том случае когда поля city и hotelName - пустые
         String city = params.get(CITY);
         String hotelName = params.get(HOTEL_NAME);
         int price;
         int persons;
-
 
         try {
             price = Integer.parseInt(params.get(PRICE));
@@ -202,7 +196,7 @@ public class Controller {
                 if (fouth.isPresent()) {
                     found = fouth.get().getRooms();
                 } else {
-
+                    System.out.println("Not found. Try to change your parameters");
                 }
                 break;
         }
