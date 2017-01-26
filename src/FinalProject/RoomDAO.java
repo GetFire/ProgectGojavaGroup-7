@@ -1,8 +1,6 @@
 package FinalProject;
 
 import java.util.List;
-import java.util.Set;
-
 
 public class RoomDAO extends DAOImpl<Room> {
     private List<Hotel>hotels;
