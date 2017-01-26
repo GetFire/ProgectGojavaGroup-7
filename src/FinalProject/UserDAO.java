@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class UserDAO extends DAOImpl<User> {
     private Set<User> users;
-    private static final String FILE_DIRECTION = "D:\\practice\\ProgectGojavaGroup-7\\src\\EscortFiles\\Users.txt";
+    private static final String FILE_DIRECTION = "src\\EscortFiles\\Users.txt";
 
     public UserDAO(Set<User> aUsers) {
         this.users = downloadUserDAO();
