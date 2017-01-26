@@ -14,7 +14,7 @@ public class User {
     private UUID id;
 
     public User(String nickname, String name, String secondName) {
-        this.nickname = name;
+        this.nickname = nickname;
         this.name = name;
         this.secondName = secondName;
         this.id = UUID.randomUUID();
