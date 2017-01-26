@@ -22,7 +22,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "{Nickname: " +nickname+ " Name: " + name
+        return "{Nickname: " + nickname + " Name: " + name
                 + " secondName: " + secondName + "}";
     }
 
@@ -30,12 +30,8 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
-        return nickname != null ? nickname.equals(user.nickname) : user.nickname == null; /** Мне кажется нужно переделать сравнение по ID,
-         потомучто имена и фамилии могут быть одинаковыми*/
-
+        return nickname != null ? nickname.equals(user.nickname) : user.nickname == null;
     }
 
     @Override
