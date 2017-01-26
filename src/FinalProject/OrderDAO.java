@@ -15,13 +15,15 @@ public class OrderDAO extends DAOImpl<Order>
     public OrderDAO(){}
 
     @Override
-    public Order save(Order object) {
-        return super.save(object);
+    public Order save(Order order) {
+        orders.add(order);
+        return order;
     }
 
     @Override
-    public Order remove(Order object) {
-        return super.remove(object);
+    public Order remove(Order order) {
+        orders.remove(order);
+        return order;
     }
 
     public List<Order> getOrders() {

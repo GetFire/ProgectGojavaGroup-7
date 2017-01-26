@@ -53,4 +53,23 @@ public class Hotel {
         return "{Hotel Name: " + hotelName
                 + ", city: " + city + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Hotel hotel = (Hotel) o;
+
+        if (getHotelName() != null ? !getHotelName().equals(hotel.getHotelName()) : hotel.getHotelName() != null)
+            return false;
+        return getCity() != null ? !getCity().equals(hotel.getCity()) : hotel.getCity() != null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getHotelName() != null ? getHotelName().hashCode() : 0;
+        result = 31 * result + (getCity() != null ? getCity().hashCode() : 0);
+        return result;
+    }
 }

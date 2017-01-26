@@ -17,18 +17,23 @@ public class HotelDAO extends DAOImpl<Hotel> {
     }
 
     @Override
-    public Hotel save(Hotel aHotel) {
-        return super.save(aHotel);
+    public Hotel save(Hotel hotel) {
+        hotels.add(hotel);
+        return hotel;
     }
 
     @Override
-    public Hotel remove(Hotel aHotel) {
-        return super.remove(aHotel);
+    public Hotel remove(Hotel hotel) {
+        hotels.remove(hotel);
+        return hotel;
     }
 
     @Override
-    public Hotel update(Hotel aHotel) {
-        return super.update(aHotel);
+    public Hotel update(Hotel hotel) {
+        int i = hotels.indexOf(hotel);
+        hotels.remove(i);
+        hotels.add(i, hotel);
+        return hotel;
     }
 
     public List<Hotel> getHotels() {

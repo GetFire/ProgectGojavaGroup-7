@@ -4,10 +4,12 @@ package FinalProject;
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
  */
 
+import java.time.LocalDate;
 import java.util.*;
 
 
 public class Main {
+
     public static void main(String[] args) {
         // create User, Controller
         Controller controller = new Controller();
@@ -38,6 +40,30 @@ public class Main {
 
 
         /** все что сверху - протестировано и работает. Дальше не могу тестировать, потомучто не написаны методы для DAO. UPD by GetFire*/
+
+        /*List<Hotel> hotels= new ArrayList<>();
+        Hotel hotel = new Hotel("Name", "City");
+        hotels.add(hotel);
+        List<Room> rooms = new ArrayList<>();
+
+        Room room = new Room(5, "Name", 500);
+        rooms.add(room);
+        hotel.setRooms(rooms);
+
+        HotelDAO hotelDAO = new HotelDAO(hotels);
+
+        System.out.println(hotelDAO.getHotels().toString());
+
+        List<Room> rooms1 = new ArrayList<>();
+
+        Room room1 = new Room(6, "Name", 400);
+        rooms1.add(room1);
+        hotel.setRooms(rooms1);
+
+        hotelDAO.update(hotel);
+        List<Hotel> hotels2 = hotelDAO.getHotels();
+        hotel = hotels2.get(0);
+        System.out.println(hotel.getRooms().toString());*/
 
 
     }

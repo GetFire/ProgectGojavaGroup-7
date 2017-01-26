@@ -57,7 +57,7 @@ public class Room {
         Room room = (Room) o;
 
         if (persons != room.persons) return false;
-        if (price != room.price) return false;
+        //if (price != room.price) return false;
         return hotelName != null ? hotelName.equals(room.hotelName) : room.hotelName == null;
 
     }
@@ -65,7 +65,7 @@ public class Room {
     @Override
     public int hashCode() {
         int result = persons;
-        result = 31 * result + price;
+        //result = 31 * result + price;
         result = 31 * result + (hotelName != null ? hotelName.hashCode() : 0);
         return result;
     }
