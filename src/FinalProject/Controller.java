@@ -31,7 +31,7 @@ public class Controller {
      * Find hotels by name
      */
     public Collection<Hotel> findHotelByName(String name) {
-        List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getHotelName().equalsIgnoreCase(name)).collect(Collectors.toList());
+        List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getHotelName().contains(name)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
 
@@ -136,7 +136,7 @@ public class Controller {
             case 1:
                 Optional<Hotel> first = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (first.isPresent()) {
                     List<Room> found1 = first.get().getRooms();
@@ -155,7 +155,7 @@ public class Controller {
             case 2:
                 Optional<Hotel> second = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (second.isPresent()) {
                     List<Room> found2 = second.get().getRooms();
@@ -175,7 +175,7 @@ public class Controller {
             case 3:
                 Optional<Hotel> third = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (third.isPresent()) {
                     List<Room> found3 = third.get().getRooms();
@@ -194,7 +194,7 @@ public class Controller {
             case 4:
                 Optional<Hotel> fouth = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().equals(hotelName))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (fouth.isPresent()) {
                     found = fouth.get().getRooms();
