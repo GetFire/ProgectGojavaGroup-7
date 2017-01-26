@@ -1,11 +1,11 @@
-package FinalProject;
+package FinalProject.main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static FinalProject.Hotel.*;
+import static FinalProject.main.Hotel.*;
 
 /**
  * Created by GetFire on 20.01.2017.

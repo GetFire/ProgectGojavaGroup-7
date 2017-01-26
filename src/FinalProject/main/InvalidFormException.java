@@ -1,4 +1,4 @@
-package FinalProject;
+package FinalProject.main;
 
 /**
  * Created by GetFire on 17.01.2017 for ProgectGojavaGroup-7

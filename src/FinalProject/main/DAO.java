@@ -1,4 +1,4 @@
-package FinalProject;
+package FinalProject.main;
 
 /**
  * Created by tvv89 on 24.01.2017 for ProgectGojavaGroup-7.

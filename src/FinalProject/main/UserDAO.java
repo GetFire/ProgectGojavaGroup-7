@@ -1,4 +1,4 @@
-package FinalProject;
+package FinalProject.main;
 
 import java.io.*;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class UserDAO extends DAOImpl<User> {
     private Set<User> users;
-    private static final String FILE_DIRECTION = "src/EscortFiles/Users.txt";
+    private static final String FILE_DIRECTION = "src\\EscortFiles\\Users.txt";
 
     public UserDAO(Set<User> aUsers) {
         this.users = downloadUserDAO();
