@@ -208,11 +208,12 @@ public class Controller {
                 if (fouth.isPresent()) {
                     found = fouth.get().getRooms();
                 } else {
-                    System.out.println("Not found. Try to change your parameters");
+
                 }
                 break;
         }
-
+        if (found.size()==0)
+            System.out.println("Not found. Try to change your parameters");
         return found;
     }
 
