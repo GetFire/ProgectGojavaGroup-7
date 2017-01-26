@@ -10,7 +10,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         // create User, Controller
-       Controller controller = new Controller();
+        Controller controller = new Controller();
         System.out.println("Введите никнейм: ");
         String nickName = ProjectUTILS.readOnlyFillLine();
         System.out.println("Введите имя: ");
@@ -18,30 +18,27 @@ public class Main {
         System.out.println("Введите фамилию: ");
         String secondName = ProjectUTILS.readOnlyFillLine();
 
-        User userMan = controller.registerUser(new User(nickName,name,secondName));
+        User userMan = controller.registerUser(new User(nickName, name, secondName));
+
+        //find hotel by city
+        List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity("Львов");
+        System.out.println(sdf);
+
+        // find hotel by name
+        sdf = (ArrayList<Hotel>) controller.findHotelByName("FOUR POINTS BY SHERATON");
+        System.out.println(sdf);
 
 
-//        //create data
-//        List<Hotel> hotels = ProjectUTILS.createHotels(10);
-//        ProjectUTILS.createDefaultRooms(hotels);
-//
-//
-//        // create controller
-//        Controller controller = new Controller(hotels);
-//
-//        //find hotel by city
-////        System.out.print("Введите название города: ");
-////        String city = ProjectUTILS.readOnlyFillLine();
-//        List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity("Львов");
-//        System.out.println(sdf);
-//
-//
-//        // создаем параметры для поиска комнаты
-//        Map<String, String> params = ProjectUTILS.createUsersRequest();
-//
-//
-//        List<Room> testFound = (ArrayList<Room>) controller.findRoom(params);
-//        testFound.forEach(System.out::println);
+        // создаем параметры для поиска комнаты
+        Map<String, String> params = ProjectUTILS.createUsersRequest();
+
+
+        List<Room> testFound = (ArrayList<Room>) controller.findRoom(params);
+        testFound.forEach(System.out::println);
+
+
+        /** все что сверху - протестировано и работает. Дальше не могу тестировать, потомучто не написаны методы для DAO. UPD by GetFire*/
+
 
     }
 }
