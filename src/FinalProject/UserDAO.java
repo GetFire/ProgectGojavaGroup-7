@@ -18,12 +18,9 @@ public class UserDAO extends DAOImpl<User> {
         writeUserDao(this.users);
     }
 
-    public UserDAO (){
+    public UserDAO() {
         this.users = downloadUserDAO();
     }
-
-
-
 
     @Override
     public User save(User aUser) {
@@ -57,6 +54,7 @@ public class UserDAO extends DAOImpl<User> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Successful downloaded!");
         return users;
 
     }
@@ -70,8 +68,7 @@ public class UserDAO extends DAOImpl<User> {
         try {
             bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FILE_DIRECTION)));
             bw.write(content.toString());
-
-
+            System.out.println("Successful recorded!");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
