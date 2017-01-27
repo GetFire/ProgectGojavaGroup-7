@@ -13,14 +13,7 @@ public class Main {
     public static void main(String[] args) {
         // create User, Controller
         Controller controller = new Controller();
-        System.out.println("Введите никнейм: ");
-        String nickName = ProjectUTILS.readOnlyFillLine();
-        System.out.println("Введите имя: ");
-        String name = ProjectUTILS.readOnlyFillLine();
-        System.out.println("Введите фамилию: ");
-        String secondName = ProjectUTILS.readOnlyFillLine();
-
-        User userMan = controller.registerUser(new User(nickName, name, secondName));
+        User userMan = ProjectUTILS.userCreater();
 
         //find hotel by city
         List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity("Львов");

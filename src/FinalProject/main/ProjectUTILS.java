@@ -7,6 +7,7 @@ import java.util.*;
 
 import static FinalProject.main.Hotel.*;
 
+
 /**
  * Created by GetFire on 20.01.2017.
  * <p>
@@ -113,6 +114,17 @@ public class ProjectUTILS {
 
         }
         return line;
+    }
+
+    public static User userCreater(){
+        System.out.println("Введите логин: ");
+        String nickName = readOnlyFillLine();
+        System.out.println("Введите имя: ");
+        String name = readOnlyFillLine();
+        System.out.println("Введите фамилию: ");
+        String secondName = readOnlyFillLine();
+        User userMan = Controller.registerUser(new User(nickName, name, secondName));
+        return userMan;
     }
 
 

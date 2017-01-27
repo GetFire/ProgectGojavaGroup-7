@@ -15,15 +15,15 @@ import static FinalProject.main.Hotel.*;
 
 public class Controller {
 
-    private UserDAO userService;
-    private OrderDAO orderService;
-    private HotelDAO hotelService;
+    private static UserDAO userService;
+    private static OrderDAO orderService;
+    private static HotelDAO hotelService;
 
 
     public Controller(List<Hotel> hotels, Set<User> users, List<Order> orders) {
-        this.hotelService = new HotelDAO(hotels);
-        this.userService = new UserDAO(users);
-        this.orderService = new OrderDAO(orders);
+        hotelService = new HotelDAO(hotels);
+        userService = new UserDAO(users);
+        orderService = new OrderDAO(orders);
 
     }
 
@@ -209,7 +209,7 @@ public class Controller {
         return found;
     }
 
-    public User registerUser(User user) {
+    public static User registerUser(User user) {
         if (!userService.getUsers().contains(user)) {
             userService.save(user);
             System.out.println(user.getNickname() + " добро пожаловать!");
