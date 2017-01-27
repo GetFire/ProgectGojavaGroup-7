@@ -3,7 +3,6 @@ package FinalProject.main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.*;
 
 import static FinalProject.main.Hotel.*;
@@ -46,7 +45,7 @@ public class ProjectUTILS {
         return params;
     }
 
-    public static List<Hotel> createHotels(int howMany) {
+    public static List<Hotel> createHotels() {
 
         String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
@@ -61,21 +60,13 @@ public class ProjectUTILS {
 
         List<Hotel> created = new ArrayList<>();
 
-        howMany = hotelsNames.length;
+        int howMany = hotelsNames.length;
         int rand1 = 0;
-        int rand2 = 0;
         while (howMany > 0) {
-            //int rand1 = (int) (Math.random() * hotelsNames.length);
-            //int rand2 = (int) (Math.random() * citiesName.length);
-            Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand2]);
-            /*if (created.contains(hotel)) {
-                hotel = null;
-                continue;
-            }*/
+            Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand1]);
             created.add(hotel);
             howMany--;
             rand1++;
-            rand2++;
         }
 
         return created;
