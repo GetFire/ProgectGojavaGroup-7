@@ -227,6 +227,7 @@ public class Controller {
     }
 
 
+
     public Controller(List<Hotel> hotels) {
         hotelService = new HotelDAO(hotels);
     }

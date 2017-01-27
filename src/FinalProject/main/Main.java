@@ -1,8 +1,8 @@
 package FinalProject.main;
 
-
 import java.util.*;
 
+import static FinalProject.main.ProjectUTILS.readString;
 
 /**
  * Created by GetFire on 26.01.2017.
@@ -21,7 +21,7 @@ public class Main {
         System.out.println("Чтобы войти или зарегистрироваться нажмите 5");
         System.out.println("========================================================================");
         System.out.println("Сделайте ваш выбор: ");
-        userAnswer = ProjectUTILS.readString();
+        userAnswer = readString();
         if (userAnswer.equals("q"))
             System.exit(1);
         int choise = Integer.valueOf(userAnswer);
@@ -87,7 +87,7 @@ public class Main {
                     System.out.println("Желаете перейти к бронированию?");
                     System.out.println("Чтобы продолжить нажмите 1");
                     System.out.println("Для выхода введите \"q\"");
-                    userAnswer = ProjectUTILS.readString();
+                    userAnswer = readString();
                     System.out.println();
                     if (userAnswer.equals("q"))
                         System.exit(1);
@@ -97,7 +97,7 @@ public class Main {
                             System.exit(1);
                         }
                         System.out.println("Введите порядковый номер комнаты для бронирования");
-                        userAnswer = ProjectUTILS.readString();
+                        userAnswer = readString();
                         if (userAnswer.equals("q"))
                             System.exit(1);
                         choise = Integer.valueOf(userAnswer);
@@ -131,7 +131,7 @@ public class Main {
                     break;
             }
             System.out.println("Сделайте ваш выбор: ");
-            userAnswer = ProjectUTILS.readString();
+            userAnswer = readString();
             count++;
         }
 

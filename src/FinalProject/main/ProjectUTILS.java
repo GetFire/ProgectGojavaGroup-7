@@ -1,12 +1,9 @@
 package FinalProject.main;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-
 import static FinalProject.main.Hotel.*;
-
 /**
  * Created by GetFire on 20.01.2017.
  * <p>
@@ -15,14 +12,13 @@ import static FinalProject.main.Hotel.*;
 public class ProjectUTILS {
     @SuppressWarnings("resource")
     static Scanner scan = new Scanner(System.in);
-
     public static Map<String, String> createUsersRequest() {
         String city = "";
         String hotelName = "";
         String price = "";
         String persons = "";
         Scanner br = scan;
-        try {
+        try{
             System.out.println("Введите название города:");
             city = readOnlyFillLine();
             System.out.println("Введите название отеля:");
@@ -41,7 +37,6 @@ public class ProjectUTILS {
         params.put(PERSONS, persons);
         return params;
     }
-
     public static List<Hotel> createHotels(int howMany) {
         String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
@@ -70,7 +65,6 @@ public class ProjectUTILS {
         }
         return created;
     }
-
     public static List<Hotel> createDefaultRooms(List<Hotel> hotels) {
         for (Hotel hotel : hotels) {
             List<Room> room = new ArrayList<>();
@@ -90,7 +84,6 @@ public class ProjectUTILS {
         }
         return hotels;
     }
-
     public static String readOnlyFillLine() {
         int count = 3;
         String line = "";
@@ -115,7 +108,6 @@ public class ProjectUTILS {
         }
         return line;
     }
-
     public static User userCreater() {
         System.out.println("Введите логин: ");
         String nickName = readOnlyFillLine();
@@ -125,16 +117,16 @@ public class ProjectUTILS {
         String secondName = readOnlyFillLine();
         return Controller.registerUser(new User(nickName, name, secondName));
     }
-
     public static String readString() {
         String line = "";
         @SuppressWarnings("resource")
         Scanner br = scan;
-        try {
+        try  {
             line = br.nextLine();
         } catch (Exception e) {
             System.out.println(e.getMessage() + " from ProjectUTILS.readString");
-        } finally {
+        }
+        finally {
             return line;
         }
     }
