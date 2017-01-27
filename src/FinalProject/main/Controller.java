@@ -236,4 +236,15 @@ public class Controller {
         orderService = new OrderDAO();
     }
 
+    public static List<User> getUserService() {
+        return userService.getUsers();
+    }
+
+    public static List<Order> getOrderService() {
+        return orderService.getOrders();
+    }
+
+    public static List<Hotel> getHotelService() {
+        return hotelService.getHotels();
+    }
 }
