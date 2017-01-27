@@ -20,7 +20,7 @@ public class Controller {
     private static HotelDAO hotelService;
 
 
-    public Controller(List<Hotel> hotels, Set<User> users, List<Order> orders) {
+    public Controller(List<Hotel> hotels, List<User> users, List<Order> orders) {
         hotelService = new HotelDAO(hotels);
         userService = new UserDAO(users);
         orderService = new OrderDAO(orders);
@@ -235,7 +235,7 @@ public class Controller {
         orderService = new OrderDAO();
     }
 
-    public static Set<User> getUserService() {
+    public static List<User> getUserService() {
         return userService.getUsers();
     }
 

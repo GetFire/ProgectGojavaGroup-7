@@ -1,17 +1,18 @@
 package FinalProject.main;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by tvv89 on 24.01.2017 for ProgectGojavaGroup-7.
  */
 public class UserDAO extends DAOImpl<User> {
-    private Set<User> users;
+    private List<User> users;
     private static final String FILE_DIRECTION = "src/EscortFiles/Users.txt";
 
-    public UserDAO(Set<User> aUsers) {
+    public UserDAO(List<User> aUsers) {
         this.users = downloadUserDAO();
         aUsers.removeAll(this.users);
         this.users.addAll(aUsers);
@@ -22,7 +23,7 @@ public class UserDAO extends DAOImpl<User> {
         this.users = downloadUserDAO();
     }
 
-    @Override
+/*    @Override
     public User save(User aUser) {
         users.add(aUser);
         return aUser;
@@ -38,11 +39,11 @@ public class UserDAO extends DAOImpl<User> {
     public User update(User aUser) { /** может в этом методе нужно сначала проверять есть ли юзер в базе, если есть вытаскивать его,
      менять данные
      и сохранять уже обновленного юзера в базу и вернуть его. Если его нет, возвращать sout(" Sorry, user not found") retutn aUser */
-        return aUser;
-    }
+//        return aUser;
+//    }
 
-    private Set<User> downloadUserDAO() {
-        Set<User> users = new HashSet<>();
+    private List<User> downloadUserDAO() {
+        List<User> users = new ArrayList<>();
         BufferedReader br = null;
         String line;
         try {
@@ -59,7 +60,7 @@ public class UserDAO extends DAOImpl<User> {
 
     }
 
-    public void writeUserDao(Set<User> user) {
+    public void writeUserDao(List<User> user) {
         StringBuilder content = new StringBuilder();
         for (User user1 : user) {
             content.append(user1.getNickname()).append("\\").append(user1.getName()).append("\\").append(user1.getSecondName()).append("\n");
@@ -83,7 +84,7 @@ public class UserDAO extends DAOImpl<User> {
 
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 }
