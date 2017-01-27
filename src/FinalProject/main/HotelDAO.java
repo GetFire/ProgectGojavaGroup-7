@@ -20,7 +20,7 @@ public class HotelDAO extends DAOImpl<Hotel> {
         super.setDataBaseList(hotels);
     }
 
-    @Override
+/*    @Override
     public Hotel save(Hotel object) {
         return super.save(object);
     }
@@ -35,7 +35,7 @@ public class HotelDAO extends DAOImpl<Hotel> {
         return super.update(object);
     }
 
-
+*/
     public List<Hotel> getHotels() {
         return super.getDataBaseList();
     }
