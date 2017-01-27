@@ -11,7 +11,7 @@ public class RoomDAO extends DAOImpl<Room> {
         super.setDataBaseList(rooms);
     }
 
-    @Override
+  /*  @Override
     public Room save(Room object) {
         return super.save(object);
     }
@@ -25,7 +25,7 @@ public class RoomDAO extends DAOImpl<Room> {
     public Room update(Room object) {
         return super.update(object);
     }
-
+*/
 
     public List<Room> getRooms() {
         return super.getDataBaseList();
