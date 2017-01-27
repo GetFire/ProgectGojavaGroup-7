@@ -2,6 +2,7 @@ package FinalProject.main;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -46,5 +47,20 @@ public class Order implements Serializable{
 
     public UUID getOrderID() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(userID, order.userID) &&
+                Objects.equals(hotelID, order.hotelID) &&
+                Objects.equals(roomID, order.roomID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userID, hotelID, roomID);
     }
 }

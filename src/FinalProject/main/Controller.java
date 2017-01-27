@@ -20,6 +20,7 @@ public class Controller {
     private static HotelDAO hotelService;
 
 
+
     public Controller(List<Hotel> hotels, List<User> users, List<Order> orders) {
         hotelService = new HotelDAO(hotels);
         userService = new UserDAO(users);

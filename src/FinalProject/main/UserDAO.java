@@ -9,18 +9,18 @@ import java.util.List;
  * Created by tvv89 on 24.01.2017 for ProgectGojavaGroup-7.
  */
 public class UserDAO extends DAOImpl<User> {
-    private List<User> users;
+   // private List<User> users;
     private static final String FILE_DIRECTION = "src/EscortFiles/Users.txt";
 
     public UserDAO(List<User> aUsers) {
-        this.users = downloadUserDAO();
-        aUsers.removeAll(this.users);
-        this.users.addAll(aUsers);
-        writeUserDao(this.users);
+        this.setDataBaseList(downloadUserDAO());
+        aUsers.removeAll(this.getDataBaseList());
+        this.getDataBaseList().addAll(aUsers);
+        writeUserDao(this.getDataBaseList());
     }
 
     public UserDAO() {
-        this.users = downloadUserDAO();
+        this.setDataBaseList(downloadUserDAO());
     }
 
 /*    @Override
@@ -85,7 +85,7 @@ public class UserDAO extends DAOImpl<User> {
     }
 
     public List<User> getUsers() {
-        return users;
+        return this.getDataBaseList();
     }
 }
 
