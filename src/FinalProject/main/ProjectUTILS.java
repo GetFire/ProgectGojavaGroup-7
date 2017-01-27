@@ -123,8 +123,7 @@ public class ProjectUTILS {
         String name = readOnlyFillLine();
         System.out.println("Введите фамилию: ");
         String secondName = readOnlyFillLine();
-        User userMan = Controller.registerUser(new User(nickName, name, secondName));
-        return userMan;
+        return Controller.registerUser(new User(nickName, name, secondName));
     }
 
 
