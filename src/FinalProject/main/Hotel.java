@@ -4,11 +4,12 @@ package FinalProject.main;
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Hotel {
+public class Hotel implements Serializable{
     public static final String CITY = "city";
     public static final String HOTEL_NAME = "hotelName";
     public static final String PRICE = "price";

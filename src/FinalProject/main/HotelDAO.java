@@ -5,7 +5,47 @@ import java.util.Set;
 
 
 public class HotelDAO extends DAOImpl<Hotel> {
-    private List<Hotel> hotels;
+
+
+    public HotelDAO() {
+        super();
+        if(super.getDataBaseList().size()==0){
+            List<Hotel> list = ProjectUTILS.createHotels(0);
+            ProjectUTILS.createDefaultRooms(list);
+            super.setDataBaseList(list);
+        }
+    }
+
+    public HotelDAO(List<Hotel> hotels){
+        super.setDataBaseList(hotels);
+    }
+
+    @Override
+    public Hotel save(Hotel object) {
+        return super.save(object);
+    }
+
+    @Override
+    public Hotel remove(Hotel object) {
+        return super.remove(object);
+    }
+
+    @Override
+    public Hotel update(Hotel object) {
+        return super.update(object);
+    }
+
+
+    public List<Hotel> getHotels() {
+        return super.getDataBaseList();
+    }
+
+
+    public void setHotels(List<Hotel> dataBaseList) {
+        super.setDataBaseList(dataBaseList);
+    }
+
+    /*private List<Hotel> hotels;
 
     public HotelDAO(List<Hotel> hotels) {
         this.hotels = hotels;
@@ -42,5 +82,5 @@ public class HotelDAO extends DAOImpl<Hotel> {
 
     public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
-    }
+    }*/
 }

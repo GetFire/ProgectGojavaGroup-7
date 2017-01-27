@@ -59,20 +59,25 @@ public class ProjectUTILS {
                 "PREMIER PALACE HOTEL", "SWISS HOTEL", "NOBILIS HOTEL", "COSMOPOLITE HOTEL", "HOTEL BRISTOL", "HOTEL STARO", "HOLIDAY INN",
                 "RADISSON BLU RESORT", "RADISSON BLU HOTEL"};
 
-        List<Hotel> created = new LinkedList<>();
+        List<Hotel> created = new ArrayList<>();
 
+        howMany = hotelsNames.length;
+        int rand1 = 0;
+        int rand2 = 0;
         while (howMany > 0) {
-            int rand1 = (int) (Math.random() * hotelsNames.length);
-            int rand2 = (int) (Math.random() * citiesName.length);
+            //int rand1 = (int) (Math.random() * hotelsNames.length);
+            //int rand2 = (int) (Math.random() * citiesName.length);
             Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand2]);
-            Hotel finalHotel = hotel;
-            if (created.contains(finalHotel)){
+            /*if (created.contains(hotel)) {
                 hotel = null;
                 continue;
-            }
+            }*/
             created.add(hotel);
             howMany--;
+            rand1++;
+            rand2++;
         }
+
         return created;
     }
 

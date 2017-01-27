@@ -3,40 +3,37 @@ package FinalProject.main;
 import java.util.List;
 
 public class RoomDAO extends DAOImpl<Room> {
-    private List<Room> rooms;
-
-    public RoomDAO(List<Room> rooms) {
-        this.rooms = rooms;
-    }
-
     public RoomDAO() {
+        super();
+    }
+
+    public RoomDAO(List<Room> rooms){
+        super.setDataBaseList(rooms);
     }
 
     @Override
-    public Room save(Room room) {
-        rooms.add(room);
-        return room;
+    public Room save(Room object) {
+        return super.save(object);
     }
 
     @Override
-    public Room remove(Room room) {
-        rooms.remove(room);
-        return room;
+    public Room remove(Room object) {
+        return super.remove(object);
     }
 
     @Override
-    public Room update(Room room) {
-        int i = rooms.indexOf(room);
-        rooms.remove(i);
-        rooms.add(i, room);
-        return room;
+    public Room update(Room object) {
+        return super.update(object);
     }
+
 
     public List<Room> getRooms() {
-        return rooms;
+        return super.getDataBaseList();
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+
+    public void setRooms(List<Room> dataBaseList) {
+        super.setDataBaseList(dataBaseList);
     }
+
 }

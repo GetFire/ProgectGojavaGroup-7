@@ -7,30 +7,37 @@ import java.util.List;
  */
 public class OrderDAO extends DAOImpl<Order>
 {
-    private List<Order> orders;
-
-    public OrderDAO(List<Order> orders) {
-        this.orders = orders;
+    public OrderDAO() {
+        super();
     }
-    public OrderDAO(){}
 
-    @Override
-    public Order save(Order order) {
-        orders.add(order);
-        return order;
+    public OrderDAO(List<Order> orders){
+        super.setDataBaseList(orders);
     }
 
     @Override
-    public Order remove(Order order) {
-        orders.remove(order);
-        return order;
+    public Order save(Order object) {
+        return super.save(object);
     }
+
+    @Override
+    public Order remove(Order object) {
+        return super.remove(object);
+    }
+
+    @Override
+    public Order update(Order object) {
+        return super.update(object);
+    }
+
 
     public List<Order> getOrders() {
-        return orders;
+        return super.getDataBaseList();
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+
+    public void setOrders(List<Order> dataBaseList) {
+        super.setDataBaseList(dataBaseList);
     }
+
 }

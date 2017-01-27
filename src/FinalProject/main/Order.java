@@ -1,12 +1,13 @@
 package FinalProject.main;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by ExAngelO on 25.01.2017.
  */
-public class Order {
+public class Order implements Serializable{
     private UUID id;
     private UUID userID;
     private UUID hotelID;
