@@ -64,7 +64,6 @@ public class Controller {
         if (user.getLogin()) {
             List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
             for (Order i : filteredOrder) {
-                boolean flag = false;
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(startDate);
                 cal.set(Calendar.DAY_OF_MONTH, days);
@@ -82,6 +81,7 @@ public class Controller {
             }
             //add order
             orderService.save(new Order(user.getId(), hotelID, roomID, startDate, days));
+            System.out.println("Congrats! You`re have booked the room!");
         } else
             System.out.println("If you want to book the room, you must be logIn!");
     }
@@ -96,6 +96,7 @@ public class Controller {
                 //delete all filtered orders
                 try {
                     filteredOrder.forEach(orderService::remove);
+                    System.out.println("You`re have deleted yours reservation!");
                 } catch (NullPointerException e) {
                     throw new InvalidFormException(e.getMessage() + " where we cancel reservation");
                 }

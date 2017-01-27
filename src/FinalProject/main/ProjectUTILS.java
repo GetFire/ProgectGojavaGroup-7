@@ -3,64 +3,55 @@ package FinalProject.main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.*;
 
 import static FinalProject.main.Hotel.*;
-
 
 /**
  * Created by GetFire on 20.01.2017.
  * <p>
  * This class is going to help you simulated some of Users requests and create data entries
  */
-
-
 public class ProjectUTILS {
+    @SuppressWarnings("resource")
+    static Scanner scan = new Scanner(System.in);
+
     public static Map<String, String> createUsersRequest() {
         String city = "";
         String hotelName = "";
         String price = "";
         String persons = "";
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+        Scanner br = scan;
+        try {
             System.out.println("Введите название города:");
             city = readOnlyFillLine();
             System.out.println("Введите название отеля:");
             hotelName = readOnlyFillLine();
             System.out.println("Введите желаемую цену:");
-            price = br.readLine();
+            price = br.nextLine();
             System.out.println("Введите кол-во спальных мест:");
-            persons = br.readLine();
-
-        } catch (IOException e) {
+            persons = br.nextLine();
+        } catch (Exception e) {
             System.out.println(e.getClass().getSimpleName() + ": " + e.getMessage());
         }
-
-
         Map<String, String> params = new HashMap<>();
         params.put(CITY, city);
         params.put(HOTEL_NAME, hotelName);
         params.put(PRICE, price);
         params.put(PERSONS, persons);
-
         return params;
     }
 
     public static List<Hotel> createHotels(int howMany) {
-
         String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
                 "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
-
-
         String[] hotelsNames = {"11 MIRRORS DESIGN HOTEL", "CRIMEA BREEZE RESIDENCE", "FAIRMONT GRAND HOTEL",
                 "SENATOR APARTMENTS MAIDAN", "KHARKIV PALACE PREMIER HOTEL", "VILLA ELENA HOTEL & RESIDENCE", "MAR LE MAR CLUB", "INTERCONTINENTAL",
                 "LEOPOLIS HOTEL", "HILTON KYIV", "HYATT REGENCY KYIV", "WELLNES SPA HOTEL MORE", "FOUR POINTS BY SHERATON", "ASTORIA HOTEL", "CONTINENTAL",
                 "PREMIER PALACE HOTEL", "SWISS HOTEL", "NOBILIS HOTEL", "COSMOPOLITE HOTEL", "HOTEL BRISTOL", "HOTEL STARO", "HOLIDAY INN",
                 "RADISSON BLU RESORT", "RADISSON BLU HOTEL"};
-
         List<Hotel> created = new ArrayList<>();
-
         howMany = hotelsNames.length;
         int rand1 = 0;
         int rand2 = 0;
@@ -77,7 +68,6 @@ public class ProjectUTILS {
             rand1++;
             rand2++;
         }
-
         return created;
     }
 
@@ -104,9 +94,11 @@ public class ProjectUTILS {
     public static String readOnlyFillLine() {
         int count = 3;
         String line = "";
+        @SuppressWarnings("resource")
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (count > 0) {
             try {
+//                System.out.println(System.in.available());
                 line = br.readLine();
                 if (line.length() == 0 || Integer.valueOf(line) != null) {
                     count--;
@@ -120,7 +112,6 @@ public class ProjectUTILS {
             } catch (IOException e) {
                 System.out.println("Проблема гдето в утилите");
             }
-
         }
         return line;
     }
@@ -135,5 +126,16 @@ public class ProjectUTILS {
         return Controller.registerUser(new User(nickName, name, secondName));
     }
 
-
+    public static String readString() {
+        String line = "";
+        @SuppressWarnings("resource")
+        Scanner br = scan;
+        try {
+            line = br.nextLine();
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + " from ProjectUTILS.readString");
+        } finally {
+            return line;
+        }
+    }
 }
