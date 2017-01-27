@@ -135,8 +135,8 @@ public class Controller {
         switch (flag) {
             case 1:
                 Optional<Hotel> first = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
+                        .filter(a -> a.getCity().equalsIgnoreCase(city))
+                        .filter(a -> a.getHotelName().contains(hotelName.toUpperCase()))
                         .findFirst();
                 if (first.isPresent()) {
                     List<Room> found1 = first.get().getRooms();
@@ -174,8 +174,8 @@ public class Controller {
 
             case 3:
                 Optional<Hotel> third = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
+                        .filter(a -> a.getCity().equalsIgnoreCase(city))
+                        .filter(a -> a.getHotelName().contains(hotelName.toUpperCase()))
                         .findFirst();
                 if (third.isPresent()) {
                     List<Room> found3 = third.get().getRooms();
@@ -193,8 +193,8 @@ public class Controller {
                 break;
             case 4:
                 Optional<Hotel> fouth = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
+                        .filter(a -> a.getCity().equalsIgnoreCase(city))
+                        .filter(a -> a.getHotelName().contains(hotelName.toUpperCase()))
                         .findFirst();
                 if (fouth.isPresent()) {
                     found = fouth.get().getRooms();
