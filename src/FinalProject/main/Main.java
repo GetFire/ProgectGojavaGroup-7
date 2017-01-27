@@ -44,7 +44,6 @@ public class Main {
         List<Room> testFound = (ArrayList<Room>) controller.findRoom(params);
         testFound.forEach(System.out::println);
 
-
         /** все что сверху - протестировано и работает. Дальше не могу тестировать, потомучто не написаны методы для DAO. UPD by GetFire*/
 
 
