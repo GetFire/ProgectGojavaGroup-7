@@ -3,6 +3,7 @@ package FinalProject.main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.*;
 
 import static FinalProject.main.Hotel.*;
@@ -47,28 +48,31 @@ public class ProjectUTILS {
 
     public static List<Hotel> createHotels(int howMany) {
 
+        String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
+                "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
+                "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
+
+
         String[] hotelsNames = {"11 MIRRORS DESIGN HOTEL", "CRIMEA BREEZE RESIDENCE", "FAIRMONT GRAND HOTEL",
                 "SENATOR APARTMENTS MAIDAN", "KHARKIV PALACE PREMIER HOTEL", "VILLA ELENA HOTEL & RESIDENCE", "MAR LE MAR CLUB", "INTERCONTINENTAL",
                 "LEOPOLIS HOTEL", "HILTON KYIV", "HYATT REGENCY KYIV", "WELLNES SPA HOTEL MORE", "FOUR POINTS BY SHERATON", "ASTORIA HOTEL", "CONTINENTAL",
                 "PREMIER PALACE HOTEL", "SWISS HOTEL", "NOBILIS HOTEL", "COSMOPOLITE HOTEL", "HOTEL BRISTOL", "HOTEL STARO", "HOLIDAY INN",
                 "RADISSON BLU RESORT", "RADISSON BLU HOTEL"};
 
-        String[] citiesName = {"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
-                "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
-                "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
-        List<Hotel> created = new ArrayList<>();
+        List<Hotel> created = new LinkedList<>();
+
         while (howMany > 0) {
             int rand1 = (int) (Math.random() * hotelsNames.length);
             int rand2 = (int) (Math.random() * citiesName.length);
             Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand2]);
-            if (created.contains(hotel)) {
+            Hotel finalHotel = hotel;
+            if (created.contains(finalHotel)){
                 hotel = null;
                 continue;
             }
             created.add(hotel);
             howMany--;
         }
-
         return created;
     }
 
@@ -92,7 +96,7 @@ public class ProjectUTILS {
         return hotels;
     }
 
-    public static String readOnlyFillLine(){
+    public static String readOnlyFillLine() {
         int count = 3;
         String line = "";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -108,7 +112,7 @@ public class ProjectUTILS {
                 }
             } catch (NumberFormatException ignored) {
                 return line;
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("Проблема гдето в утилите");
             }
 
@@ -116,7 +120,7 @@ public class ProjectUTILS {
         return line;
     }
 
-    public static User userCreater(){
+    public static User userCreater() {
         System.out.println("Введите логин: ");
         String nickName = readOnlyFillLine();
         System.out.println("Введите имя: ");

@@ -12,7 +12,7 @@ public class HotelDAO extends DAOImpl<Hotel> {
     }
 
     public HotelDAO(){
-        this.hotels = ProjectUTILS.createHotels(10);
+        this.hotels = ProjectUTILS.createHotels(25);
         ProjectUTILS.createDefaultRooms(this.hotels);
     }
 

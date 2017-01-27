@@ -30,7 +30,8 @@ public class Controller {
     /**
      * Find hotels by name
      */
-    public Collection<Hotel> findHotelByName(String name) {
+    public Collection<Hotel> findHotelByName(String aName) {
+        String name = aName.toUpperCase();
         List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getHotelName().contains(name)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
@@ -108,7 +109,8 @@ public class Controller {
     public Collection<Room> findRoom(Map<String, String> params) {
         List<Room> found = new ArrayList<>();
         String city = params.get(CITY);
-        String hotelName = params.get(HOTEL_NAME);
+        String aName = params.get(HOTEL_NAME);
+        String hotelName = aName.toUpperCase();
         int price;
         int persons;
 
@@ -136,7 +138,7 @@ public class Controller {
             case 1:
                 Optional<Hotel> first = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equalsIgnoreCase(city))
-                        .filter(a -> a.getHotelName().contains(hotelName.toUpperCase()))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (first.isPresent()) {
                     List<Room> found1 = first.get().getRooms();
@@ -175,7 +177,7 @@ public class Controller {
             case 3:
                 Optional<Hotel> third = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equalsIgnoreCase(city))
-                        .filter(a -> a.getHotelName().contains(hotelName.toUpperCase()))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (third.isPresent()) {
                     List<Room> found3 = third.get().getRooms();
@@ -194,7 +196,7 @@ public class Controller {
             case 4:
                 Optional<Hotel> fouth = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equalsIgnoreCase(city))
-                        .filter(a -> a.getHotelName().contains(hotelName.toUpperCase()))
+                        .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (fouth.isPresent()) {
                     found = fouth.get().getRooms();
@@ -224,12 +226,24 @@ public class Controller {
 
 
     public Controller(List<Hotel> hotels) {
-        this.hotelService = new HotelDAO(hotels);
+        hotelService = new HotelDAO(hotels);
     }
 
     public Controller() {
-        this.hotelService = new HotelDAO();
-        this.userService = new UserDAO();
-        this.orderService = new OrderDAO();
+        hotelService = new HotelDAO();
+        userService = new UserDAO();
+        orderService = new OrderDAO();
+    }
+
+    public static Set<User> getUserService() {
+        return userService.getUsers();
+    }
+
+    public static List<Order> getOrderService() {
+        return orderService.getOrders();
+    }
+
+    public static List<Hotel> getHotelService() {
+        return hotelService.getHotels();
     }
 }

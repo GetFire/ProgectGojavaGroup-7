@@ -61,15 +61,17 @@ public class Hotel {
 
         Hotel hotel = (Hotel) o;
 
-        if (getHotelName() != null ? !getHotelName().equals(hotel.getHotelName()) : hotel.getHotelName() != null)
-            return false;
-        return getCity() != null ? !getCity().equals(hotel.getCity()) : hotel.getCity() != null;
+        if (hotelName != null ? !hotelName.equals(hotel.hotelName) : hotel.hotelName != null) return false;
+        if (city != null ? !city.equals(hotel.city) : hotel.city != null) return false;
+        return id != null ? id.equals(hotel.id) : hotel.id == null;
+
     }
 
     @Override
     public int hashCode() {
-        int result = getHotelName() != null ? getHotelName().hashCode() : 0;
-        result = 31 * result + (getCity() != null ? getCity().hashCode() : 0);
+        int result = hotelName != null ? hotelName.hashCode() : 0;
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 }
