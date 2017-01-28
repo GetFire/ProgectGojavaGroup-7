@@ -21,12 +21,12 @@ public class Main {
         System.out.println("Чтобы войти или зарегистрироваться нажмите 5");
         System.out.println("========================================================================");
         System.out.println("Сделайте ваш выбор: ");
-        userAnswer = readString();
-        if (userAnswer.equals("q"))
-            System.exit(1);
-        int choise = Integer.valueOf(userAnswer);
+        int choise;
+
+        userAnswer = ProjectUTILS.checkInt();
+        choise = Integer.valueOf(userAnswer);
         int count=0;
-        while (!userAnswer.equals("q")) {
+        while (true) {
             if (count!=0){
                 choise = Integer.valueOf(userAnswer);
             }
@@ -87,19 +87,16 @@ public class Main {
                     System.out.println("Желаете перейти к бронированию?");
                     System.out.println("Чтобы продолжить нажмите 1");
                     System.out.println("Для выхода введите \"q\"");
-                    userAnswer = readString();
+                    userAnswer = ProjectUTILS.checkInt();;
                     System.out.println();
-                    if (userAnswer.equals("q"))
-                        System.exit(1);
-                    else {
+
                         if (!userMan.getLogin()) {
                             System.out.println("Нужно залогинится!");
                             System.exit(1);
                         }
                         System.out.println("Введите порядковый номер комнаты для бронирования");
-                        userAnswer = readString();
-                        if (userAnswer.equals("q"))
-                            System.exit(1);
+                        userAnswer = ProjectUTILS.checkInt();;
+
                         choise = Integer.valueOf(userAnswer);
                         Room booked = testFound.get(choise);
                         Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
@@ -110,7 +107,7 @@ public class Main {
                         //UUID roomID, User user, UUID hotelID, Date startDate, int days
                         assert hotel != null;
                         controller.bookRoom(booked.getId(), userMan, hotel.getId(), new Date(), 2);
-                    }
+
                     break;
                 case 4:
                     if (!userMan.getLogin()) {
@@ -131,7 +128,7 @@ public class Main {
                     break;
             }
             System.out.println("Сделайте ваш выбор: ");
-            userAnswer = readString();
+            userAnswer = ProjectUTILS.checkInt();;
             count++;
         }
 
