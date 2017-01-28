@@ -59,7 +59,7 @@ public class Controller {
         Hotel hotel = foundedHotels.get(0);
         List<Room> rooms = hotel.getRooms().stream().filter(a -> a.getId().equals(roomID)).collect(Collectors.toList());
         Room foundedRoom = rooms.get(0);
-        foundedRoom.setAvaible(false);
+        foundedRoom.setAvailable(false);
         */
         //check: Is the room booked, or not
         if (user.getLogin()) {
@@ -76,15 +76,16 @@ public class Controller {
                     caltmp.set(Calendar.DAY_OF_MONTH, j);
                     long currentDay = caltmp.getTime().getTime();
                     if (firstDay < currentDay && currentDay < lastDay) {
-                        throw new InvalidFormException("This dates are reserved");
+                        throw new InvalidFormException("These dates are already reserved");
                     }
                 }
             }
             //add order
             orderService.save(new Order(user.getId(), hotelID, roomID, startDate, days));
-            System.out.println("Congrats! You`re have booked the room!");
+            System.out.println("Congratulations! You have booked the room!");
         } else
-            System.out.println("If you want to book the room, you must be logIn!");
+//            System.out.println("If you want to book the room, you must be logIn!");
+            System.out.println("Sorry, you should be logged in to continue!");
     }
 
 
@@ -97,7 +98,8 @@ public class Controller {
                 //delete all filtered orders
                 try {
                     filteredOrder.forEach(orderService::remove);
-                    System.out.println("You`re have deleted yours reservation!");
+//                    System.out.println("You`re have deleted yours reservation!");
+                    System.out.println("Your reservation was cancelled!");
                 } catch (NullPointerException e) {
                     throw new InvalidFormException(e.getMessage() + " where we cancel reservation");
                 }
@@ -105,7 +107,8 @@ public class Controller {
             }
 
         } else
-            System.out.println("If you want to cancel the reservation, you must be logIn!");
+//            System.out.println("If you want to cancel the reservation, you must be logIn!");
+            System.out.println("Sorry, you should be logged in to cancel the reservation!");
     }
 
     public Collection<Room> findRoom(Map<String, String> params) {
@@ -216,11 +219,13 @@ public class Controller {
     public static User registerUser(User user) {
         if (!userService.getUsers().contains(user)) {
             userService.save(user);
-            System.out.println(user.getNickname() + " добро пожаловать!");
+//            System.out.println(user.getNickname() + " добро пожаловать!");
+            System.out.println(user.getNickname() + " welcome!");
             userService.writeUserDao(userService.getUsers());
             user.setLogin(true);
         } else {
-            System.out.println("С возвращением! Мы по тебе скучали!");
+//            System.out.println("С возвращением! Мы по тебе скучали!");
+            System.out.println("Welcome back! We were missing you!");
             user.setLogin(true);
         }
         return user;
