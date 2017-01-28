@@ -31,10 +31,6 @@ public class DAOImpl<T> implements DAO<T> , Serializable{
         }
     }
 
-    public File getDBFile() {
-        return DBFile;
-    }
-
     @Override
     public T save(T object) {
         this.dataBaseList.add(object);

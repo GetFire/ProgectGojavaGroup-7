@@ -37,7 +37,7 @@ public class ProjectUTILS {
         params.put(PERSONS, persons);
         return params;
     }
-    public static List<Hotel> createHotels(int howMany) {
+    public static List<Hotel> createHotels() {
         String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
                 "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
@@ -45,23 +45,15 @@ public class ProjectUTILS {
                 "SENATOR APARTMENTS MAIDAN", "KHARKIV PALACE PREMIER HOTEL", "VILLA ELENA HOTEL & RESIDENCE", "MAR LE MAR CLUB", "INTERCONTINENTAL",
                 "LEOPOLIS HOTEL", "HILTON KYIV", "HYATT REGENCY KYIV", "WELLNES SPA HOTEL MORE", "FOUR POINTS BY SHERATON", "ASTORIA HOTEL", "CONTINENTAL",
                 "PREMIER PALACE HOTEL", "SWISS HOTEL", "NOBILIS HOTEL", "COSMOPOLITE HOTEL", "HOTEL BRISTOL", "HOTEL STARO", "HOLIDAY INN",
-                "RADISSON BLU RESORT", "RADISSON BLU HOTEL"};
+                "RADISSON BLU RESORT", "RADISSON BLU HOTEL", "BEST WESTERN SEVASTOPOL HOTEL", "VICTORIA"};
         List<Hotel> created = new ArrayList<>();
-        howMany = hotelsNames.length;
+        int howMany = hotelsNames.length;
         int rand1 = 0;
-        int rand2 = 0;
         while (howMany > 0) {
-            //int rand1 = (int) (Math.random() * hotelsNames.length);
-            //int rand2 = (int) (Math.random() * citiesName.length);
-            Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand2]);
-            /*if (created.contains(hotel)) {
-                hotel = null;
-                continue;
-            }*/
+            Hotel hotel = new Hotel(hotelsNames[rand1], citiesName[rand1]);
             created.add(hotel);
             howMany--;
             rand1++;
-            rand2++;
         }
         return created;
     }
