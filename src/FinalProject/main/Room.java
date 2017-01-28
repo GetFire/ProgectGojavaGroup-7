@@ -27,7 +27,7 @@ public class Room implements Serializable{
     public Room(int persons, int price, LocalDate dateAvailableFrom, String hotelName) {
         this.persons = persons;
         this.price = price;
-        this.dateAvailableFrom = this.dateAvailableFrom;
+        this.dateAvailableFrom = dateAvailableFrom;
         this.hotelName = hotelName;
         this.id = UUID.randomUUID();
     }
