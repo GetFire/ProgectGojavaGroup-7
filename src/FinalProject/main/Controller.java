@@ -231,7 +231,15 @@ public class Controller {
         return user;
     }
 
-
+    public static User getUserByNickname(String nickname) {
+        for (User u : userService.getUsers()) {
+            if (u.getNickname().equalsIgnoreCase(nickname)) {
+                u.setLogin(true);
+                return u;
+            }
+        }
+        return null;
+    }
 
     public Controller(List<Hotel> hotels) {
         hotelService = new HotelDAO(hotels);
