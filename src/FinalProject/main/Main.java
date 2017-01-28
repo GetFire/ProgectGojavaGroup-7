@@ -103,7 +103,7 @@ public class Main {
                         {
 
                             userAnswer = ProjectUTILS.checkInt();
-                            if (userAnswer.equals("no")) {booked = null; break;}
+                            if (userAnswer.equals("-1")) {booked = null; break;}
                             choise = Integer.valueOf(userAnswer);
                             booked = testFound.get(choise);
                             break;
@@ -111,7 +111,7 @@ public class Main {
                         catch (IndexOutOfBoundsException e)
                         {
 
-                            System.out.println("Введите существующую комнату! или -no- для выхода из бронирования");
+                            System.out.println("Введите существующую комнату! или '-1' для выхода из бронирования");
                         }
                     }
                      if (booked ==null) break;
