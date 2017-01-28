@@ -21,13 +21,17 @@ public class ProjectUTILS {
         String persons = "";
         Scanner br = scan;
         try{
-            System.out.println("Введите название города:");
+//            System.out.println("Введите название города:");
+            System.out.println("Please enter city's name: ");
             city = readOnlyFillLine();
-            System.out.println("Введите название отеля:");
+//            System.out.println("Введите название отеля:");
+            System.out.println("Please enter hotel's name: ");
             hotelName = readOnlyFillLine();
-            System.out.println("Введите желаемую цену:");
+//            System.out.println("Введите желаемую цену:");
+            System.out.println("Please enter desired price: ");
             price = ProjectUTILS.checkInt();
-            System.out.println("Введите кол-во спальных мест:");
+//            System.out.println("Введите кол-во спальных мест: ");
+            System.out.println("Please enter the number of beds you need: ");
             persons = ProjectUTILS.checkInt();
         } catch (Exception e) {
             System.out.println(e.getClass().getSimpleName() + ": " + e.getMessage());
@@ -40,9 +44,12 @@ public class ProjectUTILS {
         return params;
     }
     public static List<Hotel> createHotels() {
-        String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
+        /*String[] citiesName = new String[]{"Винница", "Луцк", "Днепр", "Донецк", "Житомир", "Ужгород", "Запорожье", "Ивано-Франковск", "Киев",
                 "Кропивницкий", "Луганск", "Львов", "Николаев", "Одесса", "Полтава", "Ровно", "Сумы", "Тернополь", "Харьков", "Херсон", "Хмельницкий",
-                "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};
+                "Черкассы", "Чернигов", "Черновцы", "Севастополь", "Симферополь"};*/
+        String[] citiesName = new String[]{"Vinnytsia", "Lutsk", "Dnipro", "Donetsk", "Zhytomyr", "Uzhhorod", "Zaporizhzhia", "Ivano-Frankivsk", "Kyiv",
+                "Kropyvnytskyi", "Luhansk", "Lviv", "Mykolaiv", "Odesa", "Poltava", "Rivne", "Sumy", "Ternopil", "Kharkiv", "Kherson", "Khmelnytskyi",
+                "Cherkasy", "Chernihiv", "Chernivtsi", "Sevastopol", "Simferopol"};
         String[] hotelsNames = {"11 MIRRORS DESIGN HOTEL", "CRIMEA BREEZE RESIDENCE", "FAIRMONT GRAND HOTEL",
                 "SENATOR APARTMENTS MAIDAN", "KHARKIV PALACE PREMIER HOTEL", "VILLA ELENA HOTEL & RESIDENCE", "MAR LE MAR CLUB", "INTERCONTINENTAL",
                 "LEOPOLIS HOTEL", "HILTON KYIV", "HYATT REGENCY KYIV", "WELLNES SPA HOTEL MORE", "FOUR POINTS BY SHERATON", "ASTORIA HOTEL", "CONTINENTAL",
@@ -97,17 +104,21 @@ public class ProjectUTILS {
             } catch (NumberFormatException ignored) {
                 return line;
             } catch (IOException e) {
-                System.out.println("Проблема гдето в утилите");
+//                System.out.println("Проблема гдето в утилите");
+                System.out.println("The problem is somewhere in utils");
             }
         }
         return line;
     }
     public static User userCreater() {
-        System.out.println("Введите логин: ");
+//        System.out.println("Введите логин: ");
+        System.out.println("Please enter your login name: ");
         String nickName = readOnlyFillLine();
-        System.out.println("Введите имя: ");
+//        System.out.println("Введите имя: ");
+        System.out.println("Please enter your name: ");
         String name = readOnlyFillLine();
-        System.out.println("Введите фамилию: ");
+//        System.out.println("Введите фамилию: ");
+        System.out.println("Please enter your surname: ");
         String secondName = readOnlyFillLine();
         return Controller.registerUser(new User(nickName, name, secondName));
     }
@@ -141,7 +152,8 @@ public class ProjectUTILS {
             }
             catch (NumberFormatException e)
             {
-                System.out.println("Не верные данные. Повторите");
+//                System.out.println("Не верные данные. Повторите");
+                System.out.println("Sorry, invalid data! Please try again");
             }
         }
         return res;
@@ -155,7 +167,8 @@ public class ProjectUTILS {
         try {
             res= format.parse(date);
         } catch (ParseException e) {
-            System.out.println("Не верная дата, будет установлена текущая");
+//            System.out.println("Не верная дата, будет установлена текущая");
+            System.out.println("Sorry, you entered incorrect date. Current date will be set up");
             res = new Date();
         }
         return res;
