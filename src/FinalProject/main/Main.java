@@ -58,8 +58,8 @@ public class Main {
                         System.out.println();
                     }
 //                    System.out.println("Доступные города: ");
-                    System.out.println("Available cities: ");
-                    list.forEach(a -> System.out.print(a.getCity() + ", "));
+                    System.out.println("Hotels ");
+                    list.forEach(a -> System.out.print(a.getHotelName() + ", "));
                     System.out.println();
                     // find hotel by name
 //                    System.out.println("Введи название отеля ");
