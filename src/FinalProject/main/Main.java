@@ -95,15 +95,32 @@ public class Main {
                             System.exit(1);
                         }
                         System.out.println("Введите порядковый номер комнаты для бронирования");
-                        userAnswer = ProjectUTILS.checkInt();;
 
-                        choise = Integer.valueOf(userAnswer);
-                        Room booked = testFound.get(choise);
-                        Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
-                        Hotel hotel = null;
-                        if (optional.isPresent()) {
-                            hotel = optional.get();
+                    Room booked = null;
+                    while (true)
+                    {
+                        try
+                        {
+
+                            userAnswer = ProjectUTILS.checkInt();
+                            if (userAnswer.equals("no")) {booked = null; break;}
+                            choise = Integer.valueOf(userAnswer);
+                            booked = testFound.get(choise);
+                            break;
                         }
+                        catch (IndexOutOfBoundsException e)
+                        {
+
+                            System.out.println("Введите существующую комнату! или -no- для выхода из бронирования");
+                        }
+                    }
+                     if (booked ==null) break;
+                    //Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
+                    Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().findFirst();
+                    Hotel hotel = null;
+                    if (optional.isPresent()) {
+                            hotel = optional.get();
+                    }
                         //UUID roomID, User user, UUID hotelID, Date startDate, int days
                         assert hotel != null;
                         controller.bookRoom(booked.getId(), userMan, hotel.getId(), new Date(), 2);
