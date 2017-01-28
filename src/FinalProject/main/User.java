@@ -11,21 +11,21 @@ public class User implements Serializable{
 
     private String nickname;
     private final String name;
-    private final String secondName;
+    private final String surname;
     private UUID id;
     private boolean login = false;
 
-    public User(String nickname, String name, String secondName) {
+    public User(String nickname, String name, String surname) {
         this.nickname = nickname;
         this.name = name;
-        this.secondName = secondName;
+        this.surname = surname;
         this.id = UUID.randomUUID();
     }
 
     @Override
     public String toString() {
         return "{Nickname: " + nickname + " Name: " + name
-                + " secondName: " + secondName + "}";
+                + " surname: " + surname + "}";
     }
 
 
@@ -51,8 +51,8 @@ public class User implements Serializable{
         return name;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getSurname() {
+        return surname;
     }
 
     public UUID getId() {
