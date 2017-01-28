@@ -24,7 +24,7 @@ public class DAOImpl<T> implements DAO<T> , Serializable{
             try{
                 DBFile.createNewFile();
             }catch (IOException i){
-                System.err.println("Can't create new file");
+                System.err.println("Cannot create new file");
             }
         } catch (ClassNotFoundException e){
             System.err.println("ArrayList not found in "+nameFile+" file");
@@ -38,7 +38,7 @@ public class DAOImpl<T> implements DAO<T> , Serializable{
             writer.writeObject(dataBaseList);
             writer.flush();
         }catch (IOException e){
-            System.err.println("Can't save this file");
+            System.err.println("Cannot save this file");
         }
         return object;
 
@@ -51,7 +51,7 @@ public class DAOImpl<T> implements DAO<T> , Serializable{
             writer.writeObject(dataBaseList);
             writer.flush();
         }catch (IOException e){
-            System.err.println("Can't remove this file");
+            System.err.println("Cannot remove this file");
         }
         return object;
     }
@@ -65,7 +65,7 @@ public class DAOImpl<T> implements DAO<T> , Serializable{
             writer.writeObject(dataBaseList);
             writer.flush();
         }catch (IOException e){
-            System.err.println("Can't update this file");
+            System.err.println("Cannot update this file");
         }
         return object;
     }
@@ -80,7 +80,7 @@ public class DAOImpl<T> implements DAO<T> , Serializable{
             writer.writeObject(dataBaseList);
             writer.flush();
         }catch (IOException e){
-            System.err.println("Can't update this file");
+            System.err.println("Cannot update this file");
         }
     }
 }
