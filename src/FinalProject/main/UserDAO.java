@@ -55,7 +55,7 @@ public class UserDAO extends DAOImpl<User> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Successful downloaded!");
+//        System.out.println("Successfully downloaded!");
         return users;
 
     }
@@ -63,13 +63,13 @@ public class UserDAO extends DAOImpl<User> {
     public void writeUserDao(List<User> user) {
         StringBuilder content = new StringBuilder();
         for (User user1 : user) {
-            content.append(user1.getNickname()).append("\\").append(user1.getName()).append("\\").append(user1.getSecondName()).append("\n");
+            content.append(user1.getNickname()).append("\\").append(user1.getName()).append("\\").append(user1.getSurname()).append("\n");
         }
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FILE_DIRECTION)));
             bw.write(content.toString());
-            System.out.println("Successful recorded!");
+            System.out.println("Successfully recorded!");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

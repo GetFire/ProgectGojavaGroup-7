@@ -21,7 +21,7 @@ public class ProjectUTILSTest {
 
     @Test
     public void createHotels_withNegativeNumber() throws Exception {
-        assertEquals(emptyList, ProjectUTILS.createHotels());
+        assertEquals(emptyList, ProjectUTILS.createHotels(-1));
     }
 
     @Test
