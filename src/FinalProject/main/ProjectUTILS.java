@@ -2,6 +2,8 @@ package FinalProject.main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import static FinalProject.main.Hotel.*;
 /**
@@ -141,6 +143,20 @@ public class ProjectUTILS {
             {
                 System.out.println("Не верные данные. Повторите");
             }
+        }
+        return res;
+    }
+    public static Date toDate(String date)
+    {
+        Date res;
+
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("dd.MM.yyyy");
+        try {
+            res= format.parse(date);
+        } catch (ParseException e) {
+            System.out.println("Не верная дата, будет установлена текущая");
+            res = new Date();
         }
         return res;
     }
