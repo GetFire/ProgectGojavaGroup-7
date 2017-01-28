@@ -8,7 +8,6 @@ import static FinalProject.main.ProjectUTILS.readString;
  * Created by GetFire on 26.01.2017.
  */
 public class Main {
-
     public static void main(String[] args) throws Exception {
         Controller controller = new Controller();
         List<Hotel> list = Controller.getHotelService();
@@ -172,11 +171,8 @@ public class Main {
             }
 //            System.out.println("Сделайте ваш выбор: ");
             System.out.println("Make your choice: ");
-            userAnswer = ProjectUTILS.checkInt();;
+            userAnswer = ProjectUTILS.checkInt();
             count++;
         }
-
-
     }
 }
-
