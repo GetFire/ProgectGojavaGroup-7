@@ -112,16 +112,24 @@ public class ProjectUTILS {
     }
     public static User userCreater() {
 //        System.out.println("Введите логин: ");
-        System.out.println("Please enter your login name: ");
+        System.out.println("Please enter your nickname: ");
         String nickName = readOnlyFillLine();
+        if (Controller.getUserService().contains(Controller.getUserByNickname(nickName))) {
+            System.out.println("Welcome back! We were missing you!");
+//            Controller.getUserService().
+//            user.setLogin(true);
+            return Controller.getUserByNickname(nickName);
+        } else {
 //        System.out.println("Введите имя: ");
-        System.out.println("Please enter your name: ");
-        String name = readOnlyFillLine();
+            System.out.println("Please enter your name: ");
+            String name = readOnlyFillLine();
 //        System.out.println("Введите фамилию: ");
-        System.out.println("Please enter your surname: ");
-        String secondName = readOnlyFillLine();
-        return Controller.registerUser(new User(nickName, name, secondName));
+            System.out.println("Please enter your surname: ");
+            String secondName = readOnlyFillLine();
+            return Controller.registerUser(new User(nickName, name, secondName));
+        }
     }
+
     public static String readString() {
         String line = "";
         @SuppressWarnings("resource")
