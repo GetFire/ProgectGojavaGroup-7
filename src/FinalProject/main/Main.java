@@ -115,6 +115,9 @@ public class Main {
                         }
                     }
                      if (booked ==null) break;
+                    System.out.println("Введите дату заселения в формате 'dd.MM.yyyy': ");
+                    String readDateLine = readString();
+                    Date startDate = ProjectUTILS.toDate(readDateLine);
                     //Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
                     Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().findFirst();
                     Hotel hotel = null;
@@ -123,7 +126,7 @@ public class Main {
                     }
                         //UUID roomID, User user, UUID hotelID, Date startDate, int days
                         assert hotel != null;
-                        controller.bookRoom(booked.getId(), userMan, hotel.getId(), new Date(), 2);
+                        controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, 2);
 
                     break;
                 case 4:
