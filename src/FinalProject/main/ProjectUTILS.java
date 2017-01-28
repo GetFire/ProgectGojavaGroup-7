@@ -121,5 +121,29 @@ public class ProjectUTILS {
         finally {
             return line;
         }
+
+    }
+    public static String checkInt()
+    {
+        String res;
+        while (true)
+        {
+
+            int chackIntRes;
+            try
+            {
+                res = readString();
+                if (res.equals("q"))
+                    System.exit(1);
+
+                chackIntRes = Integer.valueOf(res);
+                break;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Не верные данные. Повторите");
+            }
+        }
+        return res;
     }
 }
