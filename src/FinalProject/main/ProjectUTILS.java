@@ -24,9 +24,9 @@ public class ProjectUTILS {
             System.out.println("Введите название отеля:");
             hotelName = readOnlyFillLine();
             System.out.println("Введите желаемую цену:");
-            price = br.nextLine();
+            price = ProjectUTILS.checkInt();
             System.out.println("Введите кол-во спальных мест:");
-            persons = br.nextLine();
+            persons = ProjectUTILS.checkInt();
         } catch (Exception e) {
             System.out.println(e.getClass().getSimpleName() + ": " + e.getMessage());
         }
@@ -128,14 +128,12 @@ public class ProjectUTILS {
         String res;
         while (true)
         {
-
             int chackIntRes;
             try
             {
                 res = readString();
                 if (res.equals("q"))
                     System.exit(1);
-
                 chackIntRes = Integer.valueOf(res);
                 break;
             }
