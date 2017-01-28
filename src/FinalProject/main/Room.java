@@ -10,24 +10,24 @@ import java.util.UUID;
 /*
 @param persons отображает количество спальных мест в номере
 @param price отображает стоимость номера за ночь
-@param dateAvaiableFrom отображает с какого числа номер свободен
+@param dateAvailableFrom отображает с какого числа номер свободен
 @param hotelName отображает название Отеля
-@param isAvaible отображает занят ли номер, по умолчанию true, меняем на false когда юзер его заказал
+@param isAvailable отображает занят ли номер, по умолчанию true, меняем на false когда юзер его заказал
 */
 
 public class Room implements Serializable{
     private UUID id;
     private int persons;
     private int price;
-    private boolean isAvaible = true;
-    private LocalDate dateAvaiableFrom;
+    private boolean isAvailable = true;
+    private LocalDate dateAvailableFrom;
     private String hotelName;
 
 
-    public Room(int persons, int price, LocalDate dateAvaiableFrom, String hotelName) {
+    public Room(int persons, int price, LocalDate dateAvailableFrom, String hotelName) {
         this.persons = persons;
         this.price = price;
-        this.dateAvaiableFrom = dateAvaiableFrom;
+        this.dateAvailableFrom = this.dateAvailableFrom;
         this.hotelName = hotelName;
         this.id = UUID.randomUUID();
     }
@@ -37,7 +37,7 @@ public class Room implements Serializable{
         this.price = price;
         this.persons = persons;
         this.hotelName = hotelName;
-        this.dateAvaiableFrom = LocalDate.of(2017, 1, 1);
+        this.dateAvailableFrom = LocalDate.of(2017, 1, 1);
         this.hotelName = hotelName;
         this.id = UUID.randomUUID();
     }
@@ -79,27 +79,27 @@ public class Room implements Serializable{
         return price;
     }
 
-    public LocalDate getDateAvaiableFrom() {
-        return dateAvaiableFrom;
+    public LocalDate getDateAvailableFrom() {
+        return dateAvailableFrom;
     }
 
     public String getHotelName() {
         return hotelName;
     }
 
-    public boolean getIsAvaible() {
-        return isAvaible;
+    public boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    public void setAvaible(boolean avaible) {
-        isAvaible = avaible;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public void setDateAvaiableFrom(LocalDate dateAvaiableFrom) {
-        this.dateAvaiableFrom = dateAvaiableFrom;
+    public void setDateAvailableFrom(LocalDate dateAvailableFrom) {
+        this.dateAvailableFrom = dateAvailableFrom;
     }
 }
