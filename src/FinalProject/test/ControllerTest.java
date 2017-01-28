@@ -19,7 +19,7 @@ public class ControllerTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        List<Hotel> hotels = ProjectUTILS.createHotels(1);
+        List<Hotel> hotels = ProjectUTILS.createHotels();
         ProjectUTILS.createDefaultRooms(hotels);
         controller = new Controller(hotels);
     }
