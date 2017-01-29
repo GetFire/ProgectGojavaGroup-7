@@ -12,7 +12,14 @@ public class Main {
         Controller controller = new Controller();
         List<Hotel> list = Controller.getHotelService();
         String userAnswer = "";
-        User userMan = new User("Default", "Default", "Default");
+        User userMan = null;
+        if (userMan==null) {
+//                        System.out.println("Чтобы продолжить Вам нужно войти или зарегистрироваться!");
+            System.out.println("Sorry, you should be logged in to continue!");
+            userMan = ProjectUTILS.userCreater();
+            System.out.println();
+        }
+
 //        System.out.println("Чтобы перейти к поиску отелей по городам нажмите 1");
         System.out.println("To find hotel using city press '1'");
 //        System.out.println("Чтобы перейти к поиску отеля по названию нажмите 2");
@@ -58,8 +65,8 @@ public class Main {
                         System.out.println();
                     }
 //                    System.out.println("Доступные города: ");
-                    System.out.println("Available cities: ");
-                    list.forEach(a -> System.out.print(a.getCity() + ", "));
+                    System.out.println("Available hotels: ");
+                    list.forEach(a -> System.out.print(a.getHotelName()  + ", "));
                     System.out.println();
                     // find hotel by name
 //                    System.out.println("Введи название отеля ");
@@ -74,12 +81,7 @@ public class Main {
                     for (int i = 0; i < 100; i++) {
                         System.out.println();
                     }
-                    if (!userMan.getLogin()) {
-//                        System.out.println("Чтобы продолжить Вам нужно войти или зарегистрироваться!");
-                        System.out.println("Sorry, you should be logged in to continue!");
-                        userMan = ProjectUTILS.userCreater();
-                        System.out.println();
-                    }
+
 
 //                    System.out.println("Доступные города: ");
                     System.out.println("Available cities: ");
@@ -139,6 +141,9 @@ public class Main {
                     System.out.println("Please enter check in date in following  format: 'dd.MM.yyyy': ");
                     String readDateLine = readString();
                     Date startDate = ProjectUTILS.toDate(readDateLine);
+                    System.out.println("Please enter days: ");
+                    String readDaysLine = ProjectUTILS.checkInt();
+                    int days = Integer.valueOf(readDaysLine);
                     //Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
                     Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().findFirst();
                     Hotel hotel = null;
@@ -147,23 +152,43 @@ public class Main {
                     }
                         //UUID roomID, User user, UUID hotelID, Date startDate, int days
                         assert hotel != null;
-                        controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, 2);
+                    try {
+                        controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, days);
+                    }
+                    catch (InvalidFormException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
 
                     break;
                 case 4:
-                    if (!userMan.getLogin()) {
+                    /*if (!userMan.getLogin()) {
 //                        System.out.println("Нужно залогинится!");
                         System.out.println("Sorry. Please log in first!");
                         System.exit(1);
-                    }
-                    User finalUserMan = userMan;
-                    Order order = null;
-                    Optional<Order> orderOptional = Controller.getOrderService().stream().filter(a -> a.getUserID().equals(finalUserMan.getId())).findFirst();
-                    if (orderOptional.isPresent()) {
+                    }*/
+                    //User finalUserMan = userMan;
+                    //Order order = null;
+                    //Optional<Order> orderOptional = Controller.getOrderService().stream().filter(a -> a.getUserID().equals(finalUserMan.getId())).findFirst();
+
+                    System.out.println("Input hotel ID: ");
+                    String hotelCancel;
+                    hotelCancel = readString();
+                    System.out.println("Input room ID: ");
+                    String roomCancel;
+                    roomCancel = readString();
+                    /*if (orderOptional.isPresent()) {
                         order = orderOptional.get();
-                    }
+                    }*/
                     //UUID roomID, User user, UUID hotelID
-                    controller.cancelReservation(order.getRoomID(), userMan, order.getHotelID());
+                    try {
+                        controller.cancelReservation(UUID.fromString(roomCancel), userMan, UUID.fromString(hotelCancel));
+                    }
+                    catch (InvalidFormException e)
+                    {
+                        System.out.println(e.getMessage());
+
+                    }
                     break;
                 case 5:
                     userMan = ProjectUTILS.userCreater();
