@@ -67,15 +67,15 @@ public class Controller {
             for (Order i : filteredOrder) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(startDate);
-                cal.set(Calendar.DAY_OF_MONTH, days);
+                cal.add(Calendar.DAY_OF_MONTH, days);
                 long firstDay = i.getStartDate().getTime();
                 long lastDay = cal.getTime().getTime();
                 for (int j = 0; j < days; j++) {
                     Calendar caltmp = Calendar.getInstance();
                     caltmp.setTime(startDate);
-                    caltmp.set(Calendar.DAY_OF_MONTH, j);
+                    caltmp.add(Calendar.DAY_OF_MONTH, j);
                     long currentDay = caltmp.getTime().getTime();
-                    if (firstDay < currentDay && currentDay < lastDay) {
+                    if (firstDay <= currentDay && currentDay < lastDay) {
                         throw new InvalidFormException("These dates are already reserved");
                     }
                 }
@@ -83,6 +83,7 @@ public class Controller {
             //add order
             orderService.save(new Order(user.getId(), hotelID, roomID, startDate, days));
             System.out.println("Congratulations! You have booked the room!");
+            System.out.println("HotelID: ["+hotelID+"], roomID: ["+roomID+"] from "+startDate+" for "+days+" day(s)");
         } else
 //            System.out.println("If you want to book the room, you must be logIn!");
             System.out.println("Sorry, you should be logged in to continue!");
@@ -92,6 +93,7 @@ public class Controller {
     public void cancelReservation(UUID roomID, User user, UUID hotelID) throws InvalidFormException {
         //filter order from user, by hotel and room
         if (user.getLogin()) {
+
             List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID) && a.getUserID().equals(user.getId()))).collect(Collectors.toList());
             if (filteredOrder.isEmpty()) throw new InvalidFormException("Order not found, input correct data");
             else {
