@@ -6,5 +6,6 @@ package FinalProject.main;
 public class InvalidFormException extends RuntimeException {
     public InvalidFormException(String message) {
         super(message);
+        System.out.println(message);
     }
 }
