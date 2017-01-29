@@ -17,13 +17,13 @@ public class Hotel implements Serializable{
 
     private String hotelName;
     private String city;
-    private  List<Room> rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
     private UUID id;
 
 
     public Hotel(String hotelName, String city) {
         this.hotelName = hotelName;
-
+        this.rooms = new RoomDAO().getRooms(hotelName);
         this.city = city;
         this.id = UUID.randomUUID();
     }

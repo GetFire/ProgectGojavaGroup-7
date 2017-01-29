@@ -11,7 +11,6 @@ public class HotelDAO extends DAOImpl<Hotel> {
         super();
         if(super.getDataBaseList().size()==0){
             List<Hotel> list = ProjectUTILS.createHotels();
-            ProjectUTILS.createDefaultRooms(list);
             super.setDataBaseList(list);
         }
     }

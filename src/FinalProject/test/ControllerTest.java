@@ -17,12 +17,12 @@ public class ControllerTest {
     private static String nonExistingId = "00000000000";
     private static List<Hotel> emptyResult = new ArrayList<>();
 
-    @BeforeClass
+    /*@BeforeClass
     public static void setUpClass() throws Exception {
         List<Hotel> hotels = ProjectUTILS.createHotels();
         ProjectUTILS.createDefaultRooms(hotels);
         controller = new Controller(hotels);
-    }
+    }*/
 
     @Test
     public void findHotelByName_hotelDoesNotExist() throws Exception {

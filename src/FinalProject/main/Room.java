@@ -99,6 +99,10 @@ public class Room implements Serializable{
         return id;
     }
 
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
     public void setDateAvailableFrom(LocalDate dateAvailableFrom) {
         this.dateAvailableFrom = dateAvailableFrom;
     }

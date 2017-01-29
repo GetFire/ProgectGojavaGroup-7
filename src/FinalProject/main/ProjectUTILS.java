@@ -66,10 +66,10 @@ public class ProjectUTILS {
         }
         return created;
     }
-    public static List<Hotel> createDefaultRooms(List<Hotel> hotels) {
-        for (Hotel hotel : hotels) {
+    public static List<Room> createDefaultRooms(String hotelName) {
+
             List<Room> room = new ArrayList<>();
-            String hotelName = hotel.getHotelName();
+
             Room rm1 = new Room(1, hotelName, 100);
             Room rm2 = new Room(2, hotelName, 200);
             Room rm3 = new Room(3, hotelName, 300);
@@ -81,9 +81,9 @@ public class ProjectUTILS {
             Room rm9 = new Room(4, hotelName, 400);
             Room rm10 = new Room(5, hotelName, 500);
             Collections.addAll(room, rm1, rm2, rm3, rm4, rm5, rm6, rm7, rm8, rm9, rm10);
-            hotel.setRooms(room);
-        }
-        return hotels;
+
+
+        return room;
     }
     public static String readOnlyFillLine() {
         int count = 3;

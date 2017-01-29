@@ -1,6 +1,7 @@
 package FinalProject.main;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomDAO extends DAOImpl<Room> {
     public RoomDAO() {
@@ -27,8 +28,8 @@ public class RoomDAO extends DAOImpl<Room> {
     }
 */
 
-    public List<Room> getRooms() {
-        return super.getDataBaseList();
+    public List<Room> getRooms(String hotelName) {
+        return super.getDataBaseList().stream().peek(room -> room.setHotelName(hotelName)).collect(Collectors.toList());
     }
 
 
