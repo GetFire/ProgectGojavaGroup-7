@@ -132,89 +132,33 @@ public class Controller {
             persons = 0;
         }
 
-
 // Set variable of searching
 
-        int flag = 0;
-        if (price != 0 && persons != 0) flag = 1;
-        else if (price == 0 && persons != 0) flag = 2;
-        else if (price != 0 && persons == 0) flag = 3;
-        else if (price == 0 && persons == 0) flag = 4;
-
-        switch (flag) {
-            case 1:
                 Optional<Hotel> first = hotelService.getHotels().stream()
                         .filter(a -> a.getCity().equalsIgnoreCase(city))
                         .filter(a -> a.getHotelName().contains(hotelName))
                         .findFirst();
                 if (first.isPresent()) {
-                    List<Room> found1 = first.get().getRooms();
-                    for (int i = 0; i < found1.size(); i++) {
-                        if (found1.get(i).getPrice() <= price && found1.get(i).getPersons() >= persons) {
-                            continue;
+                    found = first.get().getRooms();
+                    for (int i = 0; i < found.size(); i++) {
+                        if (price>0)
+                        {
+                            if (found.get(i).getPrice() <= price && found.get(i).getPersons() >= persons) {
+                                continue;
+                            }
                         }
-                        found1.remove(i);
+                        else
+                        if (found.get(i).getPersons() >= persons) {
+                                continue;
+                        }
+                        found.remove(i);
                         i--;
                     }
-                    found = found1;
                 } else {
                     System.out.println("Not found. Try to change your parameters");
                 }
-                break;
-            case 2:
-                Optional<Hotel> second = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equals(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
-                        .findFirst();
-                if (second.isPresent()) {
-                    List<Room> found2 = second.get().getRooms();
-                    for (int i = 0; i < found2.size(); i++) {
-                        if (found2.get(i).getPersons() >= persons) {
-                            continue;
-                        }
-                        found2.remove(i);
-                        i--;
-                    }
-                    found = found2;
-                } else {
-                    System.out.println("Not found. Try to change your parameters");
-                }
-                break;
-
-            case 3:
-                Optional<Hotel> third = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equalsIgnoreCase(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
-                        .findFirst();
-                if (third.isPresent()) {
-                    List<Room> found3 = third.get().getRooms();
-                    for (int i = 0; i < found3.size(); i++) {
-                        if (found3.get(i).getPrice() <= price) {
-                            continue;
-                        }
-                        found3.remove(i);
-                        i--;
-                    }
-                    found = found3;
-                } else {
-                    System.out.println("Not found. Try to change your parameters");
-                }
-                break;
-            case 4:
-                Optional<Hotel> fouth = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equalsIgnoreCase(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
-                        .findFirst();
-                if (fouth.isPresent()) {
-                    found = fouth.get().getRooms();
-                } else {
-                    System.out.println("Not found. Try to change your parameters");
-                }
-                break;
-        }
         if (found.size() == 0)
             System.out.println("Not found. Try to change your parameters");
-
         return found;
     }
 
