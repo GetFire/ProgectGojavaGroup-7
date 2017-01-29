@@ -20,14 +20,12 @@ public class Hotel implements Serializable{
     private List<Room> rooms = new ArrayList<>();
     private UUID id;
 
-
     public Hotel(String hotelName, String city) {
         this.hotelName = hotelName;
         this.rooms = new RoomDAO().getRooms(hotelName);
         this.city = city;
         this.id = UUID.randomUUID();
     }
-
 
     public String getHotelName() {
         return hotelName;
