@@ -161,8 +161,6 @@ public class Main {
                         userAnswer = ProjectUTILS.checkInt();
                         System.out.println();
                     }
-
-
                     break;
                 case 4:
 
