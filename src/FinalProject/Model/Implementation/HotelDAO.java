@@ -26,6 +26,26 @@ public class HotelDAO extends DAOImpl<Hotel> {
         return super.getDataBaseList();
     }
 
+    public String getNameByID (UUID hotelID)
+    {
+        Hotel res = null;
+        res = this.getDataBaseList().stream().filter(a->a.getId().equals(hotelID)).findFirst().get();
+        String StrRes;
+        if (res != null) StrRes = res.getHotelName();
+        else StrRes = "no_result";
+        return StrRes;
+    }
+
+    public String getCityByID (UUID hotelID)
+    {
+        Hotel res = null;
+        res = this.getDataBaseList().stream().filter(a->a.getId().equals(hotelID)).findFirst().get();
+        String StrRes;
+        if (res != null) StrRes = res.getCity();
+        else StrRes = "no_result";
+        return StrRes;
+    }
+
     public void setHotels(List<Hotel> dataBaseList) {
         super.setDataBaseList(dataBaseList);
     }
