@@ -5,6 +5,7 @@ package FinalProject.Entity;
  */
 
 import FinalProject.Model.Implementation.RoomDAO;
+import FinalProject.Services.ProjectUTILS;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class Hotel implements Serializable{
     public Hotel(String hotelName, String city) {
         this.hotelName = hotelName;
         this.rooms = new RoomDAO().getRooms(hotelName);
+//        this.rooms = ProjectUTILS.createDefaultRooms(hotelName);
         this.city = city;
         this.id = UUID.randomUUID();
     }

@@ -4,7 +4,6 @@ import FinalProject.Controller.Controller;
 import FinalProject.Entity.Hotel;
 import FinalProject.Entity.Room;
 import FinalProject.Entity.User;
-import FinalProject.Services.InvalidFormException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -136,6 +135,7 @@ public class ProjectUTILS {
             System.out.println("Please enter your surname: ");
             String secondName = readOnlyFillLine();
             user = new User(nickName, name, secondName);
+            Controller.getUserService().add(user);
 
         }
         return user;
