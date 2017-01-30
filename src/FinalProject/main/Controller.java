@@ -20,7 +20,6 @@ public class Controller {
     private static HotelDAO hotelService;
 
 
-
     public Controller(List<Hotel> hotels, List<User> users, List<Order> orders) {
         hotelService = new HotelDAO(hotels);
         userService = new UserDAO(users);
@@ -54,13 +53,6 @@ public class Controller {
      * booked the room
      */
     public void bookRoom(UUID roomID, User user, UUID hotelID, Date startDate, int days) throws InvalidFormException {
-        /*
-        List<Hotel> foundedHotels = hotels.stream().filter(a -> a.getId().equals(hotelID)).collect(Collectors.toList());
-        Hotel hotel = foundedHotels.get(0);
-        List<Room> rooms = hotel.getRooms().stream().filter(a -> a.getId().equals(roomID)).collect(Collectors.toList());
-        Room foundedRoom = rooms.get(0);
-        foundedRoom.setAvailable(false);
-        */
         //check: Is the room booked, or not
         if (user.getLogin()) {
             List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
@@ -83,9 +75,8 @@ public class Controller {
             //add order
             orderService.save(new Order(user.getId(), hotelID, roomID, startDate, days));
             System.out.println("Congratulations! You have booked the room!");
-            System.out.println("HotelID: ["+hotelID+"], roomID: ["+roomID+"] from "+startDate+" for "+days+" day(s)");
+            System.out.println("HotelID: [" + hotelID + "], roomID: [" + roomID + "] from " + startDate + " for " + days + " day(s)");
         } else
-//            System.out.println("If you want to book the room, you must be logIn!");
             System.out.println("Sorry, you should be logged in to continue!");
     }
 
@@ -100,7 +91,6 @@ public class Controller {
                 //delete all filtered orders
                 try {
                     filteredOrder.forEach(orderService::remove);
-//                    System.out.println("You`re have deleted yours reservation!");
                     System.out.println("Your reservation was cancelled!");
                 } catch (NullPointerException e) {
                     throw new InvalidFormException(e.getMessage() + " where we cancel reservation");
@@ -109,7 +99,6 @@ public class Controller {
             }
 
         } else
-//            System.out.println("If you want to cancel the reservation, you must be logIn!");
             System.out.println("Sorry, you should be logged in to cancel the reservation!");
     }
 
@@ -134,29 +123,26 @@ public class Controller {
 
 // Set variable of searching
 
-                Optional<Hotel> first = hotelService.getHotels().stream()
-                        .filter(a -> a.getCity().equalsIgnoreCase(city))
-                        .filter(a -> a.getHotelName().contains(hotelName))
-                        .findFirst();
-                if (first.isPresent()) {
-                    found = first.get().getRooms();
-                    for (int i = 0; i < found.size(); i++) {
-                        if (price>0)
-                        {
-                            if (found.get(i).getPrice() <= price && found.get(i).getPersons() >= persons) {
-                                continue;
-                            }
-                        }
-                        else
-                        if (found.get(i).getPersons() >= persons) {
-                                continue;
-                        }
-                        found.remove(i);
-                        i--;
+        Optional<Hotel> first = hotelService.getHotels().stream()
+                .filter(a -> a.getCity().equalsIgnoreCase(city))
+                .filter(a -> a.getHotelName().contains(hotelName))
+                .findFirst();
+        if (first.isPresent()) {
+            found = first.get().getRooms();
+            for (int i = 0; i < found.size(); i++) {
+                if (price > 0) {
+                    if (found.get(i).getPrice() <= price && found.get(i).getPersons() >= persons) {
+                        continue;
                     }
-                } else {
-                    System.out.println("Not found. Try to change your parameters");
+                } else if (found.get(i).getPersons() >= persons) {
+                    continue;
                 }
+                found.remove(i);
+                i--;
+            }
+        } else {
+            System.out.println("Not found. Try to change your parameters");
+        }
         if (found.size() == 0)
             System.out.println("Not found. Try to change your parameters");
         return found;
