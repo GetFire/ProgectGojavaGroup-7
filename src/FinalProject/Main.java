@@ -165,14 +165,6 @@ public class Main {
 
                     break;
                 case 4:
-                    /*if (!userMan.hasLoggedIN()) {
-//                        System.out.println("Нужно залогинится!");
-                        System.out.println("Sorry. Please log in first!");
-                        System.exit(1);
-                    }*/
-                    //User finalUserMan = userMan;
-                    //Order order = null;
-                    //Optional<Order> orderOptional = Controller.getOrderService().stream().filter(a -> a.getUserID().equals(finalUserMan.getId())).findFirst();
 
                     System.out.println("Input hotel ID: ");
                     String hotelCancel;
@@ -180,9 +172,6 @@ public class Main {
                     System.out.println("Input room ID: ");
                     String roomCancel;
                     roomCancel = readString();
-                    /*if (orderOptional.isPresent()) {
-                        order = orderOptional.get();
-                    }*/
                     //UUID roomID, User user, UUID hotelID
                     try {
                         controller.cancelReservation(UUID.fromString(roomCancel), userMan, UUID.fromString(hotelCancel));
