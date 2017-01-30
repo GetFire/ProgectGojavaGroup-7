@@ -170,9 +170,20 @@ public class Main {
                     System.out.println("Input room ID: ");
                     String roomCancel;
                     roomCancel = readString();
+                    UUID roomCancerID = null;
+                    UUID hotelCancelID = null;
+                    try {
+                         roomCancerID = UUID.fromString(roomCancel);
+                         hotelCancelID = UUID.fromString(hotelCancel);
+                    }
+                    catch (IllegalArgumentException iae)
+                    {
+                        System.out.println("Bad UUID. Try again!");
+                        break;
+                    }
                     //UUID roomID, User user, UUID hotelID
                     try {
-                        controller.cancelReservation(UUID.fromString(roomCancel), userMan, UUID.fromString(hotelCancel));
+                        controller.cancelReservation(roomCancerID, userMan, hotelCancelID);
                         System.out.println("To continue press '1'");
                         System.out.println("To exit press \"q\"");
                         userAnswer = ProjectUTILS.checkInt();
@@ -181,10 +192,7 @@ public class Main {
                         System.out.println(e.getMessage());
 
                     }
-                    catch (IllegalFormatException iae)
-                    {
-                        System.out.println("Bad UUID. Try again!");
-                    }
+
                     break;
                 case 5:
                     userMan = ProjectUTILS.userCreater();
