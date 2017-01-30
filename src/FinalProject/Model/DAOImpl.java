@@ -1,10 +1,10 @@
 package FinalProject.Model;
 
-import FinalProject.Model.DAO;
+import FinalProject.Model.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.

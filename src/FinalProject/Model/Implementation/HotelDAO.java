@@ -4,7 +4,7 @@ import FinalProject.Model.DAOImpl;
 import FinalProject.Entity.Hotel;
 import FinalProject.Services.ProjectUTILS;
 
-import java.util.List;
+import java.util.*;
 
 
 public class HotelDAO extends DAOImpl<Hotel> {
