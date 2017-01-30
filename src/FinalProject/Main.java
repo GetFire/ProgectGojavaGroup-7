@@ -55,6 +55,11 @@ public class Main {
                     String d = ProjectUTILS.readOnlyFillLine();
                     List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity(d);
                     System.out.println(sdf);
+
+                    System.out.println("To continue press '1'");
+                    System.out.println("To exit press \"q\"");
+                    userAnswer = ProjectUTILS.checkInt();
+                    System.out.println();
                     break;
                 case 2:
                     //clear the window
@@ -69,6 +74,10 @@ public class Main {
                     String s = ProjectUTILS.readOnlyFillLine();
                     sdf = (ArrayList<Hotel>) controller.findHotelByName(s);
                     System.out.println(sdf);
+                    System.out.println("To continue press '1'");
+                    System.out.println("To exit press \"q\"");
+                    userAnswer = ProjectUTILS.checkInt();
+                    System.out.println();
 
                     break;
                 case 3:
@@ -90,70 +99,70 @@ public class Main {
                             System.out.println("Room \"" + i + "\". " + room.getHotelName() + ", beds number " + room.getPersons() + " Price: " + room.getPrice() + "$");
                             i++;
                         }
-                    }
-                    System.out.println("Would you like to book the room?");
-                    System.out.println("To continue press '1'");
-                    System.out.println("To cancel press \"q\"");
-                    userAnswer = ProjectUTILS.checkInt();
-                    System.out.println();
+                        System.out.println("Would you like to book the room?");
+                        System.out.println("To continue press '1'");
+                        System.out.println("To cancel press \"q\"");
+                        userAnswer = ProjectUTILS.checkInt();
+                        System.out.println();
 
-                    if (!userMan.hasLoggedIN()) {
-                        System.out.println("Sorry. Please log in first!");
-                        System.exit(1);
-                    }
-                    System.out.println("Please enter the room's number for booking");
+                        if (!userMan.hasLoggedIN()) {
+                            System.out.println("Sorry. Please log in first!");
+                            System.exit(1);
+                        }
+                        System.out.println("Please enter the room's number for booking");
 
-                    Room booked = null;
-                    while (true) {
-                        try {
+                        Room booked = null;
+                        while (true) {
+                            try {
 
-                            userAnswer = ProjectUTILS.checkInt();
-                            if (userAnswer.equals("-1")) {
-                                booked = null;
+                                userAnswer = ProjectUTILS.checkInt();
+                                if (userAnswer.equals("-1")) {
+                                    booked = null;
+                                    break;
+                                }
+                                choice = Integer.valueOf(userAnswer);
+                                booked = testFound.get(choice);
                                 break;
-                            }
-                            choice = Integer.valueOf(userAnswer);
-                            booked = testFound.get(choice);
-                            break;
-                        } catch (IndexOutOfBoundsException e) {
+                            } catch (IndexOutOfBoundsException e) {
 
 //                            System.out.println("Введите существующую комнату! или '-1' для выхода из бронирования");
-                            System.out.println("Please enter existing room! Press '-1' if you want to cancel you booking");
+                                System.out.println("Please enter existing room! Press '-1' if you want to cancel you booking");
+                            }
                         }
-                    }
-                    if (booked == null) break;
+                        if (booked == null) break;
 //                    System.out.println("Введите дату заселения в формате 'dd.MM.yyyy': ");
-                    System.out.println("Please enter check in date in following  format: 'dd.MM.yyyy': ");
-                    String readDateLine = readString();
-                    Date startDate = ProjectUTILS.toDate(readDateLine);
-                    System.out.println("Please enter days: ");
-                    String readDaysLine = ProjectUTILS.checkInt();
-                    int days = Integer.valueOf(readDaysLine);
-                    //Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
-                    Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().findFirst();
-                    Hotel hotel = null;
-                    if (optional.isPresent()) {
-                        hotel = optional.get();
-                    }
-                    //UUID roomID, User user, UUID hotelID, Date startDate, int days
-                    assert hotel != null;
-                    try {
-                        controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, days);
-                        System.out.println("Booked!");
-                    } catch (InvalidFormException e) {
-                        System.out.println(e.getMessage());
-                    }
+                        System.out.println("Please enter check in date in following  format: 'dd.MM.yyyy': ");
+                        String readDateLine = readString();
+                        Date startDate = ProjectUTILS.toDate(readDateLine);
+                        System.out.println("Please enter days: ");
+                        String readDaysLine = ProjectUTILS.checkInt();
+                        int days = Integer.valueOf(readDaysLine);
+                        //Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();
+                        Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().findFirst();
+                        Hotel hotel = null;
+                        if (optional.isPresent()) {
+                            hotel = optional.get();
+                        }
+                        //UUID roomID, User user, UUID hotelID, Date startDate, int days
+                        assert hotel != null;
+                        try {
+                            controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, days);
 
+                            System.out.println("To continue press '1'");
+                            System.out.println("To exit press \"q\"");
+                            userAnswer = ProjectUTILS.checkInt();
+                            System.out.println();
+                        } catch (InvalidFormException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } else {
+                        System.out.println("To continue press '1'");
+                        System.out.println("To exit press \"q\"");
+                        userAnswer = ProjectUTILS.checkInt();
+                        System.out.println();
+                    }
                     break;
                 case 4:
-                    /*if (!userMan.hasLoggedIN()) {
-//                        System.out.println("Нужно залогинится!");
-                        System.out.println("Sorry. Please log in first!");
-                        System.exit(1);
-                    }*/
-                    //User finalUserMan = userMan;
-                    //Order order = null;
-                    //Optional<Order> orderOptional = Controller.getOrderService().stream().filter(a -> a.getUserID().equals(finalUserMan.getId())).findFirst();
 
                     System.out.println("Input hotel ID: ");
                     String hotelCancel;
@@ -161,12 +170,13 @@ public class Main {
                     System.out.println("Input room ID: ");
                     String roomCancel;
                     roomCancel = readString();
-                    /*if (orderOptional.isPresent()) {
-                        order = orderOptional.get();
-                    }*/
                     //UUID roomID, User user, UUID hotelID
                     try {
                         controller.cancelReservation(UUID.fromString(roomCancel), userMan, UUID.fromString(hotelCancel));
+                        System.out.println("To continue press '1'");
+                        System.out.println("To exit press \"q\"");
+                        userAnswer = ProjectUTILS.checkInt();
+                        System.out.println();
                     } catch (InvalidFormException e) {
                         System.out.println(e.getMessage());
 
