@@ -1,4 +1,6 @@
-package FinalProject.main;
+package FinalProject.Model;
+
+import FinalProject.Model.DAO;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.List;
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
  */
 
-public class DAOImpl<T> implements DAO<T> , Serializable{
+public class DAOImpl<T> implements DAO<T>, Serializable{
 
     private List<T> dataBaseList = new ArrayList<>();
     private String nameFile = this.getClass().getSimpleName();

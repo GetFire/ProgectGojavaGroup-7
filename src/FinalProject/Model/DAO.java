@@ -1,4 +1,4 @@
-package FinalProject.main;
+package FinalProject.Model;
 
 /**
  * Created by tvv89 on 24.01.2017 for ProgectGojavaGroup-7.

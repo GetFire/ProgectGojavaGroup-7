@@ -1,4 +1,10 @@
-package FinalProject.main;
+package FinalProject.Services;
+
+import FinalProject.Controller.Controller;
+import FinalProject.Entity.Hotel;
+import FinalProject.Entity.Room;
+import FinalProject.Entity.User;
+import FinalProject.Services.InvalidFormException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +13,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static FinalProject.main.Hotel.*;
+import static FinalProject.Entity.Hotel.*;
+
 
 /**
  * Created by GetFire on 20.01.2017.

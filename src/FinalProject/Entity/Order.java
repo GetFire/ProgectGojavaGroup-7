@@ -1,4 +1,4 @@
-package FinalProject.main;
+package FinalProject.Entity;
 
 import java.io.Serializable;
 import java.util.Date;

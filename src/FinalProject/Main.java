@@ -1,8 +1,14 @@
-package FinalProject.main;
+package FinalProject;
+
+import FinalProject.Controller.Controller;
+import FinalProject.Entity.Hotel;
+import FinalProject.Entity.Room;
+import FinalProject.Entity.User;
+import FinalProject.Services.*;
 
 import java.util.*;
 
-import static FinalProject.main.ProjectUTILS.readString;
+import static FinalProject.Services.ProjectUTILS.readString;
 
 /**
  * Created by GetFire on 26.01.2017.

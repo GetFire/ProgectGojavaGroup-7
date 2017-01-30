@@ -1,4 +1,4 @@
-package FinalProject.main;
+package FinalProject.Services;
 
 /**
  * Created by GetFire on 17.01.2017 for ProgectGojavaGroup-7

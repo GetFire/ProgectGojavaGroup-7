@@ -1,7 +1,7 @@
 package FinalProject.test;
 
-import FinalProject.main.Hotel;
-import FinalProject.main.ProjectUTILS;
+import FinalProject.Entity.Hotel;
+import FinalProject.Services.ProjectUTILS;
 import org.junit.Ignore;
 import org.junit.Test;
 

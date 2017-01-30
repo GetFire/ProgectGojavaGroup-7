@@ -1,4 +1,4 @@
-package FinalProject.main;
+package FinalProject.Controller;
 
 /**
  * Created by GetFire on 15.01.2017 for ProgectGojavaGroup-7.
@@ -6,11 +6,20 @@ package FinalProject.main;
  * An instance of this class simulates user operation
  */
 
+import FinalProject.Entity.Hotel;
+import FinalProject.Entity.Order;
+import FinalProject.Entity.Room;
+import FinalProject.Entity.User;
+import FinalProject.Model.Implementation.HotelDAO;
+import FinalProject.Model.Implementation.OrderDAO;
+import FinalProject.Model.Implementation.UserDAO;
+import FinalProject.Services.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 
-import static FinalProject.main.Hotel.*;
+import static FinalProject.Entity.Hotel.*;
 
 
 public class Controller {

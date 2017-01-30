@@ -1,9 +1,7 @@
 package FinalProject.test;
 
-import FinalProject.main.Controller;
-import FinalProject.main.Hotel;
-import FinalProject.main.ProjectUTILS;
-import org.junit.BeforeClass;
+import FinalProject.Controller.Controller;
+import FinalProject.Entity.Hotel;
 import org.junit.Ignore;
 import org.junit.Test;
 import java.util.ArrayList;

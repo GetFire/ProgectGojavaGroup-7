@@ -1,4 +1,7 @@
-package FinalProject.main;
+package FinalProject.Model.Implementation;
+
+import FinalProject.Model.DAOImpl;
+import FinalProject.Entity.Room;
 
 import java.util.List;
 import java.util.stream.Collectors;

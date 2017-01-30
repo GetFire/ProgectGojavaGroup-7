@@ -1,14 +1,12 @@
 package FinalProject.test;
 
-import FinalProject.main.User;
-import FinalProject.main.UserDAO;
+import FinalProject.Entity.User;
+import FinalProject.Model.Implementation.UserDAO;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
