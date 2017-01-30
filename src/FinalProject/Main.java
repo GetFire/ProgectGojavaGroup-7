@@ -14,6 +14,7 @@ import static FinalProject.Services.ProjectUTILS.readString;
  * Created by GetFire on 26.01.2017.
  */
 public class Main {
+
     public static void main(String[] args) throws Exception {
         Controller controller = new Controller();
         List<Hotel> list = Controller.getHotelService();
@@ -25,13 +26,7 @@ public class Main {
             System.out.println();
         }
 
-        System.out.println("To find hotel using city press '1'");
-        System.out.println("To find hotel using hotel's name press '2'");
-        System.out.println("To find hotel using detailed parameters press '3'");
-        System.out.println("To cancel your booking press '4'");
-        System.out.println("To sign in/sign up press '5'");
-        System.out.println("========================================================================");
-        System.out.println("Make your choice: ");
+        printText();
         int choice;
 
         userAnswer = ProjectUTILS.checkInt();
@@ -56,10 +51,7 @@ public class Main {
                     List<Hotel> sdf = (ArrayList<Hotel>) controller.findHotelByCity(d);
                     System.out.println(sdf);
 
-                    System.out.println("To continue press '1'");
-                    System.out.println("To exit press \"q\"");
-                    userAnswer = ProjectUTILS.checkInt();
-                    System.out.println();
+                    userAnswer = continueBlock();
                     break;
                 case 2:
                     //clear the window
@@ -74,10 +66,7 @@ public class Main {
                     String s = ProjectUTILS.readOnlyFillLine();
                     sdf = (ArrayList<Hotel>) controller.findHotelByName(s);
                     System.out.println(sdf);
-                    System.out.println("To continue press '1'");
-                    System.out.println("To exit press \"q\"");
-                    userAnswer = ProjectUTILS.checkInt();
-                    System.out.println();
+                    userAnswer = continueBlock();
 
                     break;
                 case 3:
@@ -100,10 +89,7 @@ public class Main {
                             i++;
                         }
                         System.out.println("Would you like to book the room?");
-                        System.out.println("To continue press '1'");
-                        System.out.println("To cancel press \"q\"");
-                        userAnswer = ProjectUTILS.checkInt();
-                        System.out.println();
+                        userAnswer = continueBlock();
 
                         if (!userMan.hasLoggedIN()) {
                             System.out.println("Sorry. Please log in first!");
@@ -148,18 +134,12 @@ public class Main {
                         try {
                             controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, days);
 
-                            System.out.println("To continue press '1'");
-                            System.out.println("To exit press \"q\"");
-                            userAnswer = ProjectUTILS.checkInt();
-                            System.out.println();
+                            userAnswer = continueBlock();
                         } catch (InvalidFormException e) {
                             System.out.println(e.getMessage());
                         }
                     } else {
-                        System.out.println("To continue press '1'");
-                        System.out.println("To exit press \"q\"");
-                        userAnswer = ProjectUTILS.checkInt();
-                        System.out.println();
+                        userAnswer = continueBlock();
                     }
                     break;
                 case 4:
@@ -184,10 +164,7 @@ public class Main {
                     //UUID roomID, User user, UUID hotelID
                     try {
                         controller.cancelReservation(roomCancerID, userMan, hotelCancelID);
-                        System.out.println("To continue press '1'");
-                        System.out.println("To exit press \"q\"");
-                        userAnswer = ProjectUTILS.checkInt();
-                        System.out.println();
+                        userAnswer = continueBlock();
                     } catch (InvalidFormException e) {
                         System.out.println(e.getMessage());
 
@@ -198,15 +175,28 @@ public class Main {
                     userMan = ProjectUTILS.userCreater();
                     break;
             }
-            System.out.println("To find hotel using city press '1'");
-            System.out.println("To find hotel using hotel's name press '2'");
-            System.out.println("To find hotel using detailed parameters press '3'");
-            System.out.println("To cancel your booking press '4'");
-            System.out.println("To sign in/sign up press '5'");
-            System.out.println("========================================================================");
-            System.out.println("Make your choice: ");
+            printText();
             userAnswer = ProjectUTILS.checkInt();
             count++;
         }
+    }
+
+    public static void printText(){
+        System.out.println("To find hotel using city press '1'");
+        System.out.println("To find hotel using hotel's name press '2'");
+        System.out.println("To find hotel using detailed parameters press '3'");
+        System.out.println("To cancel your booking press '4'");
+        System.out.println("To sign in/sign up press '5'");
+        System.out.println("========================================================================");
+        System.out.println("Make your choice: ");
+    }
+
+    public static String continueBlock(){
+        String userAnswer;
+        System.out.println("To continue press '1'");
+        System.out.println("To exit press \"q\"");
+        userAnswer = ProjectUTILS.checkInt();
+        System.out.println();
+        return userAnswer;
     }
 }
