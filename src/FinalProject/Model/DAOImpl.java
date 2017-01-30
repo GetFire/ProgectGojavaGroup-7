@@ -37,12 +37,7 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
     @Override
     public T save(T object) {
         this.dataBaseList.add(object);
-        try(ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(DBFile))){
-            writer.writeObject(dataBaseList);
-            writer.flush();
-        }catch (IOException e){
-            System.err.println("Cannot save this file");
-        }
+        setDataBaseList(dataBaseList);
         return object;
 
     }
@@ -50,12 +45,7 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
     @Override
     public T remove(T object) {
         this.dataBaseList.remove(object);
-        try(ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(DBFile))){
-            writer.writeObject(dataBaseList);
-            writer.flush();
-        }catch (IOException e){
-            System.err.println("Cannot remove this file");
-        }
+        setDataBaseList(dataBaseList);
         return object;
     }
 
@@ -64,12 +54,7 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
         int i = this.dataBaseList.indexOf(object);
         this.dataBaseList.remove(object);
         this.dataBaseList.add(i, object);
-        try(ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(DBFile))){
-            writer.writeObject(dataBaseList);
-            writer.flush();
-        }catch (IOException e){
-            System.err.println("Cannot update this file");
-        }
+        setDataBaseList(dataBaseList);
         return object;
     }
     @Override
@@ -83,7 +68,7 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
             writer.writeObject(dataBaseList);
             writer.flush();
         }catch (IOException e){
-            System.err.println("Cannot update this file");
+            System.err.println("Cannot save this file");
         }
     }
 }

@@ -64,7 +64,8 @@ public class Controller {
     public void bookRoom(UUID roomID, User user, UUID hotelID, Date startDate, int days) throws InvalidFormException {
         //check: Is the room booked, or not
         if (user.hasLoggedIN()) {
-            List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
+            List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID) && a.getUserID().equals(user.getId()))).collect(Collectors.toList());
+            if (filteredOrder.isEmpty()) throw new InvalidFormException("Sorry, order not found!");
             for (Order i : filteredOrder) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(startDate);
