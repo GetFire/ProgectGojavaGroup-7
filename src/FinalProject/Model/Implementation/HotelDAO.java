@@ -12,7 +12,7 @@ public class HotelDAO extends DAOImpl<Hotel> {
 
     public HotelDAO() {
         super();
-        if(super.getDataBaseList().size()==0){
+        if(super.getDataBaseList().size()==0 || super.getDataBaseList().stream().allMatch(hotel -> hotel.getRooms().size()==0)){
             List<Hotel> list = ProjectUTILS.createHotels();
             super.setDataBaseList(list);
         }
