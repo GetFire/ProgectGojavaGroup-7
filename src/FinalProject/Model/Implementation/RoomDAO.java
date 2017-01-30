@@ -2,6 +2,7 @@ package FinalProject.Model.Implementation;
 
 import FinalProject.Model.DAOImpl;
 import FinalProject.Entity.Room;
+import FinalProject.Services.ProjectUTILS;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,9 @@ import java.util.stream.Collectors;
 public class RoomDAO extends DAOImpl<Room> {
     public RoomDAO() {
         super();
+        if(super.getDataBaseList().size()==0){
+            this.setRooms(ProjectUTILS.createDefaultRooms("non-name"));
+        }
     }
 
     public RoomDAO(List<Room> rooms){
