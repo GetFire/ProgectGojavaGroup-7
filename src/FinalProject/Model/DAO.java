@@ -12,6 +12,8 @@ public interface DAO<T> {
 
     T update(T object);
 
+    void clean ();
+
     List<T> getDataBaseList();
 
 }

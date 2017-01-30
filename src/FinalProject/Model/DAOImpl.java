@@ -57,6 +57,16 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
         setDataBaseList(dataBaseList);
         return object;
     }
+
+    @Override
+    public void clean() {
+        try{
+            DBFile.createNewFile();
+        } catch (IOException e) {
+            System.err.println("Cannot clean file");
+        }
+    }
+
     @Override
     public List<T> getDataBaseList() {
         return dataBaseList;
