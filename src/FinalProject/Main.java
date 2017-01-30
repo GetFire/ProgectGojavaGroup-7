@@ -186,7 +186,7 @@ public class Main {
         System.out.println("To find hotel using hotel's name press '2'");
         System.out.println("To find hotel using detailed parameters press '3'");
         System.out.println("To cancel your booking press '4'");
-        System.out.println("To sign in/sign up press '5'");
+        System.out.println("To sign in/sign up as different user press '5'");
         System.out.println("========================================================================");
         System.out.println("Make your choice: ");
     }
