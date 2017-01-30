@@ -150,8 +150,8 @@ public class Controller {
                 found.remove(i);
                 i--;
             }
-        } else {
-            System.out.println("Not found. Try to change your parameters");
+//        } else {
+//            System.out.println("Not found. Try to change your parameters");
         }
         if (found.size() == 0)
             System.out.println("Not found. Try to change your parameters");
