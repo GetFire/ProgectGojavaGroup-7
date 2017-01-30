@@ -19,7 +19,7 @@ public class Main {
         List<Hotel> list = Controller.getHotelService();
         String userAnswer;
         User userMan = null;
-        if (userMan==null) {
+        if (userMan == null) {
             System.out.println("Sorry, you should be logged in to continue!");
             userMan = ProjectUTILS.userCreater();
             System.out.println();
@@ -36,9 +36,9 @@ public class Main {
 
         userAnswer = ProjectUTILS.checkInt();
         choice = Integer.valueOf(userAnswer);
-        int count=0;
+        int count = 0;
         while (true) {
-            if (count!=0){
+            if (count != 0) {
                 choice = Integer.valueOf(userAnswer);
             }
             switch (choice) {
@@ -62,7 +62,7 @@ public class Main {
                         System.out.println();
                     }
                     System.out.println("Available hotels: ");
-                    list.forEach(a -> System.out.print(a.getHotelName()  + ", "));
+                    list.forEach(a -> System.out.print(a.getHotelName() + ", "));
                     System.out.println();
                     // find hotel by name
                     System.out.println("Please enter the hotel's name: ");
@@ -94,36 +94,34 @@ public class Main {
                     System.out.println("Would you like to book the room?");
                     System.out.println("To continue press '1'");
                     System.out.println("To cancel press \"q\"");
-                    userAnswer = ProjectUTILS.checkInt();;
+                    userAnswer = ProjectUTILS.checkInt();
                     System.out.println();
 
-                        if (!userMan.getLogin()) {
-                            System.out.println("Sorry. Please log in first!");
-                            System.exit(1);
-                        }
+                    if (!userMan.hasLoggedIN()) {
+                        System.out.println("Sorry. Please log in first!");
+                        System.exit(1);
+                    }
                     System.out.println("Please enter the room's number for booking");
 
-
                     Room booked = null;
-                    while (true)
-                    {
-                        try
-                        {
+                    while (true) {
+                        try {
 
                             userAnswer = ProjectUTILS.checkInt();
-                            if (userAnswer.equals("-1")) {booked = null; break;}
+                            if (userAnswer.equals("-1")) {
+                                booked = null;
+                                break;
+                            }
                             choice = Integer.valueOf(userAnswer);
                             booked = testFound.get(choice);
                             break;
-                        }
-                        catch (IndexOutOfBoundsException e)
-                        {
+                        } catch (IndexOutOfBoundsException e) {
 
 //                            System.out.println("Введите существующую комнату! или '-1' для выхода из бронирования");
                             System.out.println("Please enter existing room! Press '-1' if you want to cancel you booking");
                         }
                     }
-                     if (booked ==null) break;
+                    if (booked == null) break;
 //                    System.out.println("Введите дату заселения в формате 'dd.MM.yyyy': ");
                     System.out.println("Please enter check in date in following  format: 'dd.MM.yyyy': ");
                     String readDateLine = readString();
@@ -135,21 +133,20 @@ public class Main {
                     Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().findFirst();
                     Hotel hotel = null;
                     if (optional.isPresent()) {
-                            hotel = optional.get();
+                        hotel = optional.get();
                     }
-                        //UUID roomID, User user, UUID hotelID, Date startDate, int days
-                        assert hotel != null;
+                    //UUID roomID, User user, UUID hotelID, Date startDate, int days
+                    assert hotel != null;
                     try {
                         controller.bookRoom(booked.getId(), userMan, hotel.getId(), startDate, days);
-                    }
-                    catch (InvalidFormException e)
-                    {
+                        System.out.println("Booked!");
+                    } catch (InvalidFormException e) {
                         System.out.println(e.getMessage());
                     }
 
                     break;
                 case 4:
-                    /*if (!userMan.getLogin()) {
+                    /*if (!userMan.hasLoggedIN()) {
 //                        System.out.println("Нужно залогинится!");
                         System.out.println("Sorry. Please log in first!");
                         System.exit(1);
@@ -170,9 +167,7 @@ public class Main {
                     //UUID roomID, User user, UUID hotelID
                     try {
                         controller.cancelReservation(UUID.fromString(roomCancel), userMan, UUID.fromString(hotelCancel));
-                    }
-                    catch (InvalidFormException e)
-                    {
+                    } catch (InvalidFormException e) {
                         System.out.println(e.getMessage());
 
                     }
@@ -181,7 +176,12 @@ public class Main {
                     userMan = ProjectUTILS.userCreater();
                     break;
             }
-//            System.out.println("Сделайте ваш выбор: ");
+            System.out.println("To find hotel using city press '1'");
+            System.out.println("To find hotel using hotel's name press '2'");
+            System.out.println("To find hotel using detailed parameters press '3'");
+            System.out.println("To cancel your booking press '4'");
+            System.out.println("To sign in/sign up press '5'");
+            System.out.println("========================================================================");
             System.out.println("Make your choice: ");
             userAnswer = ProjectUTILS.checkInt();
             count++;

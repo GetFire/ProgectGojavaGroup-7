@@ -28,7 +28,8 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
             }catch (IOException i){
                 System.err.println("Cannot create new file");
             }
-        } catch (ClassNotFoundException e){
+        } catch (Exception e){
+            System.out.println(e.getClass().getSimpleName()+":"+e.getCause());
             System.err.println("ArrayList not found in "+nameFile+" file");
         }
     }
@@ -71,7 +72,7 @@ public class DAOImpl<T> implements DAO<T>, Serializable{
         }
         return object;
     }
-
+    @Override
     public List<T> getDataBaseList() {
         return dataBaseList;
     }
