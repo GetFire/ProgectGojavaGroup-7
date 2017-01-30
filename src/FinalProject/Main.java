@@ -181,6 +181,10 @@ public class Main {
                         System.out.println(e.getMessage());
 
                     }
+                    catch (IllegalFormatException iae)
+                    {
+                        System.out.println("Bad UUID. Try again!");
+                    }
                     break;
                 case 5:
                     userMan = ProjectUTILS.userCreater();
