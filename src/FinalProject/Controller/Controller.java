@@ -192,8 +192,8 @@ public class Controller {
         orderService = new OrderDAO();
     }
 
-    public static List<User> getUserService() {
-        return userService.getUsers();
+    public static UserDAO getUserService() {
+        return userService;
     }
 
     public static List<Order> getOrderService() {
