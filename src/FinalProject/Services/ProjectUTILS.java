@@ -108,13 +108,18 @@ public class ProjectUTILS {
                     System.err.println("This field must be filled in correctly. You have " + count + " attempts!");
                 }
                 if (count <= 0) {
+                    System.err.print("Sorry, invalid data!");
+                    System.exit(1);
                     throw new InvalidFormException("Sorry, invalid data!");
+
+
                 }
             } catch (NumberFormatException ignored) {
                 return line;
             } catch (IOException e) {
 //                System.out.println("Проблема гдето в утилите");
                 System.out.println("The problem is somewhere in utils");
+
             }
         }
         return line;

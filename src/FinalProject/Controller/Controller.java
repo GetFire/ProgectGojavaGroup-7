@@ -83,8 +83,7 @@ public class Controller {
             }
             //add order
             orderService.save(new Order(user.getId(), hotelID, roomID, startDate, days));
-            System.out.println("Congratulations! You have booked the room!");
-            System.out.println("HotelID: [" + hotelID + "], roomID: [" + roomID + "] from " + startDate + " for " + days + " day(s)");
+            System.out.println("Congratulations! You have booked the room!"+"From " + startDate + " for " + days + " day(s)");
         } else
             System.out.println("Sorry, you should be logged in to continue!");
     }
