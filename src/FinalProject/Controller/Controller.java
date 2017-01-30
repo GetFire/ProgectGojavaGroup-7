@@ -67,8 +67,8 @@ public class Controller {
             List<Order> filteredOrder = orderService.getOrders().stream().filter(a -> (a.getHotelID().equals(hotelID) && a.getRoomID().equals(roomID))).collect(Collectors.toList());
             for (Order i : filteredOrder) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(startDate);
-                cal.add(Calendar.DAY_OF_MONTH, days);
+                cal.setTime(i.getStartDate());
+                cal.add(Calendar.DAY_OF_MONTH, i.getDays());
                 long firstDay = i.getStartDate().getTime();
                 long lastDay = cal.getTime().getTime();
                 for (int j = 0; j < days; j++) {
