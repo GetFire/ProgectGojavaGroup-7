@@ -44,7 +44,6 @@ public class Controller {
         List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getHotelName().contains(name)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
-
     }
 
 
@@ -55,7 +54,6 @@ public class Controller {
         List<Hotel> hotel = hotelService.getHotels().stream().filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
         if (hotel.size() == 0) System.out.println("Not found");
         return hotel;
-
     }
 
     /**
