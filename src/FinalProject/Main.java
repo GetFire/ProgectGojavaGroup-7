@@ -21,7 +21,7 @@ public class Main {
         String userAnswer;
         User userMan = null;
         if (userMan == null) {
-            System.out.println("Sorry, you should be logged in to continue!");
+//            System.out.println("Sorry, you should be logged in to continue!");
             userMan = ProjectUTILS.userCreater();
             System.out.println();
         }
@@ -120,7 +120,8 @@ public class Main {
                         System.out.println("Please enter check in date in following  format: 'dd.MM.yyyy': ");
                         String readDateLine = readString();
                         Date startDate = ProjectUTILS.toDate(readDateLine);
-                        System.out.println("Please enter days: ");
+//                        System.out.println("Please enter days: ");
+                        System.out.println("How many days are you going to stay there?");
                         String readDaysLine = ProjectUTILS.checkInt();
                         int days = Integer.valueOf(readDaysLine);
                         //Optional<Hotel> optional = controller.findHotelByName(booked.getHotelName()).stream().filter(a -> a.getHotelName().equals(booked.getHotelName())).findFirst();

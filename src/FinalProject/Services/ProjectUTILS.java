@@ -127,7 +127,7 @@ public class ProjectUTILS {
 
     public static User userCreater() {
         User user;
-        System.out.println("Please enter your nickname: ");
+        System.out.println("Please enter your nickname to continue: ");
         String nickName = readOnlyFillLine();
         if (Controller.getUserService().getDataBaseList().contains(Controller.getUserByNickname(nickName))) {
             System.out.println("Welcome back! We were missing you!");
@@ -141,7 +141,7 @@ public class ProjectUTILS {
             String secondName = readOnlyFillLine();
             user = new User(nickName, name, secondName);
             Controller.getUserService().save(user);
-
+            user.setLogin(true);
         }
         return user;
     }
