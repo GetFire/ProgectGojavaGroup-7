@@ -4,6 +4,8 @@ import FinalProject.Controller.Controller;
 import FinalProject.Entity.Hotel;
 import FinalProject.Entity.Room;
 import FinalProject.Entity.User;
+import FinalProject.Model.Implementation.OrderDAO;
+import FinalProject.Model.Implementation.RoomDAO;
 import FinalProject.Services.*;
 
 import java.util.*;

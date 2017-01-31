@@ -17,30 +17,28 @@ public class OrderDAO extends DAOImpl<Order>
     public OrderDAO(List<Order> orders){
         super.setDataBaseList(orders);
     }
+    /*
+        @Override
+        public Order save(Order object) {
+            return super.save(object);
+        }
 
-    @Override
-    public Order save(Order object) {
-        return super.save(object);
-    }
+        @Override
+        public Order remove(Order object) {
+            return super.remove(object);
+        }
 
-    @Override
-    public Order remove(Order object) {
-        return super.remove(object);
-    }
+        @Override
+        public Order update(Order object) {
+            return super.update(object);
+        }
 
-    @Override
-    public Order update(Order object) {
-        return super.update(object);
-    }
-
-
+    */
     public List<Order> getOrders() {
         return super.getDataBaseList();
     }
 
 
-    public void setOrders(List<Order> dataBaseList) {
-        super.setDataBaseList(dataBaseList);
-    }
+
 
 }
