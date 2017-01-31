@@ -25,6 +25,21 @@ public class UserDAO extends DAOImpl<User> {
         super.setDataBaseList(user);
     }
 
+    public User getUserByNickname(String nickname) {
+        if (this.getDataBaseList() ==null) return null;
+        for (User u : this.getDataBaseList()) {
+            try
+            {
+                if (u.getNickname().equalsIgnoreCase(nickname)) {
+                    u.setLogin(true);
+                    return u;
+                }
+            }
+            catch(NullPointerException e) {return null;}
+        }
+        return null;
+    }
+
     public List<User> getUsers() {
         return this.getDataBaseList();
     }

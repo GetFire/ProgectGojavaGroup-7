@@ -28,7 +28,7 @@ public class ControllerTest {
     public static void setUpClass() throws Exception {
         controller = new Controller();
         emptyResult = new ArrayList<>();
-        user = Controller.getUserByNickname("oops");
+        user = Controller.getUserService().getUserByNickname("oops");
         nullUser = new User(null, null, null);
     }
 
@@ -80,11 +80,11 @@ public class ControllerTest {
 
     @Test
     public void getUserByNickname_withNull() throws Exception {
-        assertNull(Controller.getUserByNickname(emptyString));
+        assertNull(Controller.getUserService().getUserByNickname(emptyString));
     }
 
     @Test
     public void getUserByNickname_withNonExistingNickname() throws Exception {
-        assertNull(Controller.getUserByNickname(nonExistingName));
+        assertNull(Controller.getUserService().getUserByNickname(nonExistingName));
     }
 }

@@ -129,11 +129,11 @@ public class ProjectUTILS {
         User user;
         System.out.println("Please enter your nickname to continue: ");
         String nickName = readOnlyFillLine();
-        if (Controller.getUserService().getDataBaseList().contains(Controller.getUserByNickname(nickName))) {
+        if (Controller.getUserService().getDataBaseList().contains(Controller.getUserService().getUserByNickname(nickName))) {
             System.out.println("Welcome back! We were missing you!");
 //            Controller.getUserService().
 //            user.setLogin(true);
-            user = Controller.getUserByNickname(nickName);
+            user = Controller.getUserService().getUserByNickname(nickName);
         } else {
             System.out.println("Please enter your name: ");
             String name = readOnlyFillLine();
