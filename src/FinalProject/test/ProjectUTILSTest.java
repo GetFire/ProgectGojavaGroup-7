@@ -12,14 +12,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ProjectUTILSTest {
-    private static List<Hotel> emptyList = new ArrayList<>();
     private static String emptyString = "";
     private static String invalidDate = "Invalid Date";
     private static String dateFormat1 = "20170202";
     private static String dateFormat2 = "02-02-2017";
     private static String dateFormat3 = "02-Feb-2017";
     private static String dateFormat4 = "02 Feb 2017";
-
     private static Date currentDate = new Date();
 
     @Test
