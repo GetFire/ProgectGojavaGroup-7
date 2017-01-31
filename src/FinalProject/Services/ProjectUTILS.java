@@ -126,7 +126,7 @@ public class ProjectUTILS {
     }
 
     public static User userCreater() {
-        User user;
+        User user=null;
         System.out.println("Please enter your nickname to continue: ");
         String nickName = readOnlyFillLine();
         if (Controller.getUserService().getDataBaseList().contains(Controller.getUserService().getUserByNickname(nickName))) {
@@ -139,9 +139,15 @@ public class ProjectUTILS {
             String name = readOnlyFillLine();
             System.out.println("Please enter your surname: ");
             String secondName = readOnlyFillLine();
-            user = new User(nickName, name, secondName);
-            Controller.getUserService().save(user);
-            user.setLogin(true);
+            try {
+                user = new User(nickName, name, secondName);
+                Controller.getUserService().save(user);
+                user.setLogin(true);
+            }
+            catch (NullPointerException e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
         return user;
     }

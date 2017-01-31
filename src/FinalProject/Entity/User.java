@@ -15,7 +15,8 @@ public class User implements Serializable{
     private UUID id;
     private boolean login = false;
 
-    public User(String nickname, String name, String surname) {
+    public User(String nickname, String name, String surname) throws NullPointerException{
+        if (nickname==null || nickname.length()==0) throw new NullPointerException("Please enter nickname");
         this.nickname = nickname;
         this.name = name;
         this.surname = surname;

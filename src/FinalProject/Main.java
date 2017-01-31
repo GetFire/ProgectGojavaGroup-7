@@ -22,7 +22,7 @@ public class Main {
         List<Hotel> list = Controller.getHotelService();
         String userAnswer;
         User userMan = null;
-        if (userMan == null) {
+        while (userMan == null) {
 //            System.out.println("Sorry, you should be logged in to continue!");
             userMan = ProjectUTILS.userCreater();
             System.out.println();
