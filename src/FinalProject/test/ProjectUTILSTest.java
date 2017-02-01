@@ -1,24 +1,14 @@
 package FinalProject.test;
 
-import FinalProject.Entity.Hotel;
 import FinalProject.Services.ProjectUTILS;
-import org.junit.Ignore;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class ProjectUTILSTest {
-    private static String emptyString = "";
-    private static String invalidDate = "Invalid Date";
-    private static String dateFormat1 = "20170202";
-    private static String dateFormat2 = "02-02-2017";
-    private static String dateFormat3 = "02-Feb-2017";
-    private static String dateFormat4 = "02 Feb 2017";
-    private static Date currentDate = new Date();
+public class ProjectUTILSTest extends TestSetUp{
 
     @Test
     public void toDate_withNull() throws Exception {
