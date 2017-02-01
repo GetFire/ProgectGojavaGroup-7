@@ -8,9 +8,8 @@ import static org.junit.runners.Suite.*;
 @SuiteClasses({
         ControllerTest.class,
         DAOImplTest.class,
-        OrderDAOTest.class,
+        HotelDAOTest.class,
         ProjectUTILSTest.class,
-        RoomDAOTest.class,
         UserDAOTest.class
 })
 public class TestRunner {

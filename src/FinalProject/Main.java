@@ -23,7 +23,6 @@ public class Main {
         String userAnswer;
         User userMan = null;
         while (userMan == null) {
-//            System.out.println("Sorry, you should be logged in to continue!");
             userMan = ProjectUTILS.userCreater();
             System.out.println();
         }
@@ -112,17 +111,13 @@ public class Main {
                                 booked = testFound.get(choice);
                                 break;
                             } catch (IndexOutOfBoundsException e) {
-
-//                            System.out.println("Введите существующую комнату! или '-1' для выхода из бронирования");
                                 System.out.println("Please enter existing room! Press '-1' if you want to cancel you booking");
                             }
                         }
                         if (booked == null) break;
-//                    System.out.println("Введите дату заселения в формате 'dd.MM.yyyy': ");
                         System.out.println("Please enter check in date in following  format: 'dd.MM.yyyy': ");
                         String readDateLine = readString();
                         Date startDate = ProjectUTILS.toDate(readDateLine);
-//                        System.out.println("Please enter days: ");
                         System.out.println("How many days are you going to stay there?");
                         String readDaysLine = ProjectUTILS.checkInt();
                         int days = Integer.valueOf(readDaysLine);
@@ -190,6 +185,7 @@ public class Main {
         System.out.println("To find hotel using detailed parameters press '3'");
         System.out.println("To cancel your booking press '4'");
         System.out.println("To sign in/sign up as different user press '5'");
+        System.out.println("To exit press \"q\"");
         System.out.println("========================================================================");
         System.out.println("Make your choice: ");
     }
