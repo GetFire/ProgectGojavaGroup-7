@@ -191,7 +191,7 @@ public class ProjectUTILS {
         format.applyPattern("dd.MM.yyyy");
         try {
             res = format.parse(date);
-        } catch (ParseException e) {
+        } catch (Exception e) {
 //            System.out.println("Не верная дата, будет установлена текущая");
             System.out.println("Sorry, you entered incorrect date. Current date will be set up");
             res = new Date();
